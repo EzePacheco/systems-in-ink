@@ -1,0 +1,28 @@
+---
+import type { NavItem } from "../../data/portfolio.data";
+
+interface Props {
+  navItems: NavItem[];
+}
+
+const { navItems } = Astro.props;
+---
+
+<aside class="side-rail">
+  <div class="rail-inner">
+    <a class="rail-home" href="#inicio" aria-label="Ir al inicio">
+      <span>EP</span>
+    </a>
+    <nav class="rail-nav" aria-label="Navegación lateral">
+      {
+        navItems.map((item, index) => (
+          <a href={item.href}>
+            <span class="rail-index">{String(index + 1).padStart(2, "0")}</span>
+            <span class="rail-label">{item.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+    <div class="rail-mark" aria-hidden="true">技</div>
+  </div>
+</aside>

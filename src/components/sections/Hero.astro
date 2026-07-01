@@ -1,0 +1,39 @@
+---
+import { heroActions, principles, profile } from "../../data/portfolio.data";
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-main">
+    <span class="eyebrow" aria-hidden="true">{profile.edition}</span>
+    <h1 id="hero-title">{profile.heroTitle}</h1>
+    <p class="hero-copy">{profile.heroDescription}</p>
+
+    <div class="actions" aria-label="Acciones principales">
+      {
+        heroActions.map((action) => (
+          <a
+            class={`btn ${action.variant === "primary" ? "btn-primary" : ""}`}
+            href={action.href}
+            target={action.external ? "_blank" : undefined}
+            rel={action.external ? "noreferrer" : undefined}
+            download={action.download ? true : undefined}
+          >
+            {action.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <aside class="hero-aside" aria-label="Principios de trabajo">
+    {
+      principles.map((principle) => (
+        <article class="aside-block">
+          <span class="aside-label">{principle.eyebrow}</span>
+          <h2 class="aside-title">{principle.title}</h2>
+          <p>{principle.description}</p>
+        </article>
+      ))
+    }
+  </aside>
+</section>

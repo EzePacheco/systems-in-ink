@@ -1,0 +1,26 @@
+---
+import { processSteps } from "../../data/portfolio.data";
+---
+
+<section id="proceso" aria-labelledby="proceso-title">
+  <div class="section-grid">
+    <div class="section-title">
+      <span class="section-num" aria-hidden="true">02 / 方法</span>
+      <h2 id="proceso-title">Método de trabajo</h2>
+      <p>Menos ruido visual, más claridad técnica. Cada decisión tiene que mejorar el sistema.</p>
+    </div>
+
+    <div class="section-body process-list">
+      {
+        processSteps.map((step) => (
+          <article class="process-item">
+            <span class="process-glyph" aria-hidden="true">{step.glyph}</span>
+            <span class="process-index">{step.index}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

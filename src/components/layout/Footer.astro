@@ -1,0 +1,13 @@
+---
+interface Props {
+  name: string;
+  note: string;
+}
+
+const { name, note } = Astro.props;
+---
+
+<footer class="footer">
+  <span>© 2026 {name}</span>
+  <span>{note}</span>
+</footer>

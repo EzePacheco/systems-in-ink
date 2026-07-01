@@ -1,0 +1,35 @@
+---
+import { contact, profile } from "../../data/portfolio.data";
+import { CopyEmailButton } from "../react/CopyEmailButton";
+---
+
+<section id="contacto" class="contact" aria-labelledby="contacto-title">
+  <div class="contact-copy">
+    <span class="eyebrow" aria-hidden="true">{contact.eyebrow}</span>
+    <h2 id="contacto-title">{contact.title}</h2>
+    <p>{contact.description}</p>
+    <CopyEmailButton
+      email={profile.email}
+      label={contact.copyButton.label}
+      successLabel={contact.copyButton.successLabel}
+      failureLabel={contact.copyButton.failureLabel}
+      client:idle
+    />
+  </div>
+
+  <div class="contact-links" aria-label="Canales de contacto">
+    {
+      contact.links.map((link) => (
+        <a
+          class="contact-link"
+          href={link.href}
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noreferrer" : undefined}
+        >
+          <strong>{link.label}</strong>
+          <span>{link.display}</span>
+        </a>
+      ))
+    }
+  </div>
+</section>

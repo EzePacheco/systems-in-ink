@@ -1,0 +1,21 @@
+---
+import { projects } from "../../data/portfolio.data";
+import { ProjectFilter } from "../react/ProjectFilter";
+---
+
+<section id="proyectos" aria-labelledby="proyectos-title">
+  <div class="section-grid">
+    <div class="section-title">
+      <span class="section-num" aria-hidden="true">01 / 作品</span>
+      <h2 id="proyectos-title" class="projects-heading">
+        <span>Proyectos</span>
+        <span>seleccionados</span>
+      </h2>
+      <p>Casos orientados a backend, datos, producto, operación e integración.</p>
+    </div>
+
+    <div class="section-body">
+      <ProjectFilter projects={projects} client:idle />
+    </div>
+  </div>
+</section>
