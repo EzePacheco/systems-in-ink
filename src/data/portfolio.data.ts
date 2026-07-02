@@ -82,6 +82,8 @@ export const profile = {
   footerNote: "Backend-oriented Full Stack Developer",
 };
 
+const gmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`;
+
 export const links = {
   github: {
     label: "GitHub",
@@ -97,9 +99,9 @@ export const links = {
   },
   email: {
     label: "Email",
-    href: `mailto:${profile.email}`,
+    href: gmailHref,
     display: profile.email,
-    external: false,
+    external: true,
   },
 } satisfies Record<string, LinkItem>;
 
@@ -126,7 +128,7 @@ export const heroActions: HeroAction[] = [
     variant: "secondary",
     download: true,
   },
-  { label: "Contactar", href: links.email.href, variant: "secondary" },
+  { label: "Contactar", href: links.email.href, variant: "secondary", external: true },
 ];
 
 export const principles: Principle[] = [
