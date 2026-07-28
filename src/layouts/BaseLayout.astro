@@ -1,4 +1,6 @@
 ---
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/ibm-plex-sans";
 import "../styles/tokens.css";
 import "../styles/global.css";
 
@@ -27,6 +29,41 @@ const { title, description, ogImage } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <a class="skip-link" href="#inicio">Saltar al contenido</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <slot />
+    <script is:inline>
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const enterTargets = Array.from(document.querySelectorAll("[data-enter]"));
+      const siteHeader = document.querySelector(".site-header");
+
+      const syncHeader = () => {
+        siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+      };
+
+      syncHeader();
+      window.addEventListener("scroll", syncHeader, { passive: true });
+
+      if (!reducedMotion && "IntersectionObserver" in window) {
+        const enterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.remove("enter-pending");
+              entry.target.classList.add("enter-visible");
+              enterObserver.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+        );
+
+        enterTargets.forEach((target, index) => {
+          if (target.getBoundingClientRect().top <= window.innerHeight * 0.92) return;
+          target.style.setProperty("--enter-delay", `${Math.min(index % 3, 2) * 55}ms`);
+          target.classList.add("enter-pending");
+          enterObserver.observe(target);
+        });
+      }
+    </script>
   </body>
 </html>

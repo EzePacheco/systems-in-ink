@@ -2,27 +2,32 @@
 import { experience } from "../../data/portfolio.data";
 ---
 
-<section id="experiencia" aria-labelledby="experiencia-title">
-  <div class="section-grid">
-    <div class="section-title">
-      <span class="section-num" aria-hidden="true">04 / 経歴</span>
-      <h2 id="experiencia-title">Experiencia</h2>
-      <p>Una trayectoria combinando desarrollo, operación y control de calidad.</p>
+<section id="experiencia" class="experience" aria-labelledby="experiencia-title">
+  <div class="section-intro" data-enter>
+    <span class="section-num" aria-hidden="true">01</span>
+    <div>
+      <p class="section-kicker">Trayectoria</p>
+      <h2 id="experiencia-title">Experiencia que conecta ingeniería y operación.</h2>
     </div>
+    <p>
+      Desarrollo de software, liderazgo, negocio y QA: una mirada completa sobre cómo se construye
+      y se sostiene un producto.
+    </p>
+  </div>
 
-    <div class="section-body experience-list">
-      {
-        experience.map((item) => (
-          <article class="job">
-            <span class="job-date">{item.date}</span>
-            <div>
-              <h3>{item.company}</h3>
-              <span class="job-role">{item.role}</span>
-              <p>{item.description}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
+  <div class="experience-list">
+    {
+      experience.map((item, index) => (
+        <article class="job" data-enter>
+          <span class="job-index">{String(index + 1).padStart(2, "0")}</span>
+          <div class="job-heading">
+            <h3>{item.company}</h3>
+            <p class="job-role">{item.role}</p>
+          </div>
+          <p class="job-description">{item.description}</p>
+          <time>{item.date}</time>
+        </article>
+      ))
+    }
   </div>
 </section>

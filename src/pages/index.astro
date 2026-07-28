@@ -1,12 +1,10 @@
 ---
 import EditorialFrame from "../components/layout/EditorialFrame.astro";
+import Capabilities from "../components/sections/Capabilities.astro";
+import CaseStudies from "../components/sections/CaseStudies.astro";
 import Contact from "../components/sections/Contact.astro";
 import Experience from "../components/sections/Experience.astro";
 import Hero from "../components/sections/Hero.astro";
-import Metrics from "../components/sections/Metrics.astro";
-import Process from "../components/sections/Process.astro";
-import Projects from "../components/sections/Projects.astro";
-import Stack from "../components/sections/Stack.astro";
 import { metadata } from "../data/portfolio.data";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
@@ -14,11 +12,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout title={metadata.title} description={metadata.description} ogImage={metadata.ogImage}>
   <EditorialFrame>
     <Hero />
-    <Metrics />
-    <Projects />
-    <Process />
-    <Stack />
     <Experience />
+    <CaseStudies />
+    <Capabilities />
     <Contact />
   </EditorialFrame>
 </BaseLayout>

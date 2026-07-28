@@ -1,38 +1,27 @@
 ---
 import type { LinkItem } from "../../data/portfolio.data";
 
-interface Profile {
-  name: string;
-  role: string;
-}
-
 interface Props {
-  profile: Profile;
   links: LinkItem[];
+  cvPath: string;
 }
 
-const { profile, links } = Astro.props;
-const [firstName, ...lastNameParts] = profile.name.split(" ");
-const lastName = lastNameParts.join(" ");
+const { links, cvPath } = Astro.props;
 ---
 
-<header class="top-strip">
-  <a class="brand" href="#inicio" aria-label="Ir al inicio">
-    <strong>{firstName} <span>{lastName}</span></strong>
-    <span>{profile.role}</span>
-  </a>
-
-  <nav class="top-links" aria-label="Navegación principal">
+<header class="site-header">
+  <nav class="site-nav" aria-label="Navegación principal">
     {
       links.map((link) => (
-        <a
-          href={link.href}
-          target={link.external ? "_blank" : undefined}
-          rel={link.external ? "noreferrer" : undefined}
-        >
+        <a href={link.href}>
           {link.label}
         </a>
       ))
     }
   </nav>
+
+  <a class="mobile-cv" href={cvPath} download>
+    CV
+    <span aria-hidden="true">↓</span>
+  </a>
 </header>

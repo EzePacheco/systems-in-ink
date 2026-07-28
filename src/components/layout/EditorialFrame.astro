@@ -1,91 +1,15 @@
 ---
-import { headerLinks, navItems, profile } from "../../data/portfolio.data";
+import { navItems, profile } from "../../data/portfolio.data";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
-import SideRail from "./SideRail.astro";
+import PortfolioStyles from "./PortfolioStyles.astro";
 ---
 
+<PortfolioStyles />
 <div class="page-shell">
-  <div class="editorial-frame">
-    <SideRail navItems={navItems} />
-    <div class="content">
-      <Header profile={profile} links={headerLinks} />
-      <main id="inicio">
-        <slot />
-      </main>
-      <Footer name={profile.name} note={profile.footerNote} />
-    </div>
-  </div>
+  <Header links={navItems} cvPath={profile.cvPath} />
+  <main id="inicio">
+    <slot />
+  </main>
+  <Footer name={profile.name} note={profile.footerNote} />
 </div>
-
-<script>
-  const sectionIds = ["proyectos", "proceso", "stack", "experiencia", "contacto"];
-  const internalLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
-
-  const isHTMLElement = (element: HTMLElement | null): element is HTMLElement =>
-    element instanceof HTMLElement;
-
-  const setCurrentSection = (sectionId: string) => {
-    if (!sectionIds.includes(sectionId)) {
-      document.documentElement.removeAttribute("data-section");
-    } else {
-      document.documentElement.dataset.section = sectionId;
-    }
-
-    internalLinks.forEach((link) => {
-      const linkTarget = link.getAttribute("href")?.slice(1);
-
-      if (!linkTarget || (!sectionIds.includes(linkTarget) && linkTarget !== "inicio")) {
-        return;
-      }
-
-      if (linkTarget === sectionId) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
-  };
-
-  const syncFromHash = () => {
-    const hashTarget = window.location.hash.slice(1);
-    setCurrentSection(hashTarget);
-  };
-
-  const sections = sectionIds
-    .map((sectionId) => document.getElementById(sectionId))
-    .filter(isHTMLElement);
-
-  let scrollTicking = false;
-
-  const syncFromScroll = () => {
-    const readingLine = window.innerHeight * 0.38;
-    const reachedPageEnd =
-      window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 6;
-    const currentSection = sections.reduce((current, section) => {
-      if (section.getBoundingClientRect().top <= readingLine) {
-        return section.id;
-      }
-
-      return current;
-    }, "");
-
-    setCurrentSection(reachedPageEnd ? "contacto" : currentSection);
-    scrollTicking = false;
-  };
-
-  const requestScrollSync = () => {
-    if (scrollTicking) {
-      return;
-    }
-
-    scrollTicking = true;
-    window.requestAnimationFrame(syncFromScroll);
-  };
-
-  syncFromHash();
-  requestScrollSync();
-  window.addEventListener("hashchange", syncFromHash);
-  window.addEventListener("scroll", requestScrollSync, { passive: true });
-  window.addEventListener("resize", requestScrollSync);
-</script>

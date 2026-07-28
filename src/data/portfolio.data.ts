@@ -1,58 +1,37 @@
-export type NavItem = {
-  label: string;
-  href: string;
-};
+import type { ImageMetadata } from "astro";
+import chichitosVisual from "../assets/cases/chichitos.png";
+import chemicalSoftwareVisual from "../assets/cases/chemical-software-mockup.png";
+import elEditorVisual from "../assets/cases/el-editor-responsive-mockup.png";
+import elementosVisual from "../assets/cases/elementos-responsive-mockup.png";
+import memoriesAiVisual from "../assets/cases/memoriesai-terminal.svg";
+import mineCallVisual from "../assets/cases/minecall.png";
 
 export type LinkItem = {
   label: string;
   href: string;
   display?: string;
   external?: boolean;
-};
-
-export type HeroAction = LinkItem & {
-  variant?: "primary" | "secondary";
   download?: boolean;
 };
 
-export type Metric = {
-  value: string;
-  label: string;
-  context: string;
-};
-
-export type Principle = {
-  eyebrow: string;
-  title: string;
-  description: string;
-};
-
-export type ProjectLink = {
-  label: string;
-  href: string;
-  external?: boolean;
-};
-
 export type Project = {
+  id: string;
   index: string;
   title: string;
-  description: string;
-  tags: string[];
-  filters: string[];
-  decorativeGlyph: string;
-  links: ProjectLink[];
-};
-
-export type ProcessStep = {
-  index: string;
-  glyph: string;
-  title: string;
-  description: string;
-};
-
-export type StackGroup = {
-  title: string;
-  items: string[];
+  status: string;
+  prominence: "featured" | "compact";
+  summary: string;
+  problem: string;
+  responsibility: string;
+  decisions: string[];
+  evidence: string[];
+  stack: string[];
+  media: {
+    src: ImageMetadata;
+    alt: string;
+    caption: string;
+  };
+  links: LinkItem[];
 };
 
 export type ExperienceItem = {
@@ -62,27 +41,38 @@ export type ExperienceItem = {
   description: string;
 };
 
+export type Capability = {
+  index: string;
+  title: string;
+  description: string;
+  items: string[];
+};
+
 export const metadata = {
-  title: "Ezequiel Pacheco | Full Stack Developer Backend-Oriented",
+  title: "Ezequiel Pacheco | Full Stack Developer con foco en backend",
   description:
-    "Portfolio editorial de Ezequiel Pacheco, Full Stack Developer backend-oriented en Buenos Aires, especializado en Node.js, APIs REST, PostgreSQL, CMS, SaaS e integraciones.",
-  ogImage: "/black-paper-editorial-texture.png",
+    "Portfolio de Ezequiel Pacheco, Full Stack Developer con foco en backend. Experiencia en productos web, APIs, PostgreSQL, CMS, ecommerce y sistemas en tiempo real.",
+  ogImage: "/portfolio-social.jpg",
 };
 
 export const profile = {
   name: "Ezequiel Pacheco",
-  role: "Full Stack Developer · Backend-Oriented",
+  role: "Full Stack Developer con foco en backend",
   location: "Buenos Aires, Argentina",
+  currentCompany: "DELSUD",
   email: "ezequielpacheco.dev@gmail.com",
-  cvPath: "/Ezequiel_Pacheco_CV_JUN_2026.pdf",
-  edition: "Portfolio / Engineering / 2026",
-  heroTitle: "Sistemas claros. Backend sólido.",
+  cvPath: "/Ezequiel_Pacheco_CV_JUL_2026.pdf",
   heroDescription:
-    "Diseño y construyo productos web de punta a punta: APIs, datos, autenticación, CMS, SaaS e integraciones preparadas para producción.",
-  footerNote: "Backend-oriented Full Stack Developer",
+    "Diseño e implemento sistemas web de punta a punta: backend, datos, APIs, interfaces, pruebas y operación. Además, aporto contexto de negocio y decisiones de producto.",
+  footerNote: "Backend, full stack y operación de productos web.",
 };
 
-const gmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}`;
+const gmailComposeHref = (subject?: string) =>
+  `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.email)}${
+    subject ? `&su=${encodeURIComponent(subject)}` : ""
+  }`;
+
+const emailHref = gmailComposeHref();
 
 export const links = {
   github: {
@@ -99,298 +89,315 @@ export const links = {
   },
   email: {
     label: "Email",
-    href: gmailHref,
+    href: emailHref,
     display: profile.email,
     external: true,
   },
 } satisfies Record<string, LinkItem>;
 
-export const navItems: NavItem[] = [
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Stack", href: "#stack" },
+export const navItems: LinkItem[] = [
   { label: "Experiencia", href: "#experiencia" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Capacidades", href: "#capacidades" },
   { label: "Contacto", href: "#contacto" },
 ];
 
-export const headerLinks: LinkItem[] = [
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Stack", href: "#stack" },
-  links.github,
-  links.linkedin,
-];
-
-export const heroActions: HeroAction[] = [
-  { label: "Ver proyectos", href: "#proyectos", variant: "primary" },
+export const heroActions: LinkItem[] = [
+  { label: "Contactar", href: emailHref },
   {
     label: "Descargar CV",
     href: profile.cvPath,
-    variant: "secondary",
     download: true,
   },
-  { label: "Contactar", href: links.email.href, variant: "secondary", external: true },
+  { label: "Ver proyectos", href: "#proyectos" },
 ];
 
-export const principles: Principle[] = [
+export const recruiterProof = [
   {
-    eyebrow: "Principio 01",
-    title: "Dominio",
-    description:
-      "Reglas de negocio, permisos, actores y flujos antes que framework.",
+    value: "Producción",
+    label: "Sistemas reales, no sólo demos",
   },
   {
-    eyebrow: "Principio 02",
-    title: "Datos",
-    description:
-      "Modelado relacional, migraciones, ownership y consistencia operacional.",
+    value: "Full stack",
+    label: "Backend, datos e interfaces de punta a punta",
   },
   {
-    eyebrow: "Principio 03",
-    title: "Producción",
-    description:
-      "Logs, health checks, seguridad, testing, performance y mantenimiento.",
-  },
-];
-
-export const metrics: Metric[] = [
-  {
-    value: "~200K",
-    label: "visitas mensuales",
-    context: "CMS y portales públicos",
-  },
-  {
-    value: "~70K",
-    label: "usuarios únicos",
-    context: "audiencia mensual",
-  },
-  {
-    value: "+20K",
-    label: "dispositivos testeados",
-    context: "hardware/software QA",
-  },
-  {
-    value: "+1.300",
-    label: "tickets mensuales",
-    context: "operación de negocio",
+    value: "Ownership",
+    label: "Calidad, operación y producto como diferencial",
   },
 ];
 
 export const projects: Project[] = [
   {
+    id: "el-editor-cms",
     index: "01",
     title: "El Editor CMS",
-    description:
-      "CMS editorial multitenant en producción. Backend completo, APIs REST, modelos Sequelize, migraciones, media library, usuarios/RBAC, métricas, configuración del sitio, banners, RSS/WebSub y workflows editoriales.",
-    tags: [
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "Sequelize",
-      "AWS S3",
-      "WebSub/RSS",
+    status: "En producción",
+    prominence: "featured",
+    summary:
+      "Plataforma editorial multisitio para administrar contenido, usuarios, media, analítica y publicación de portales digitales.",
+    problem:
+      "Unificar la operación de distintos medios sin duplicar producto, manteniendo identidad, permisos y flujos editoriales propios.",
+    responsibility:
+      "Desarrollé capacidades del backend, el CMS React y los portales públicos: datos, autenticación, RBAC, media, métricas, publicidad, publicación e integraciones operativas.",
+    decisions: [
+      "Separar CMS, API, portal público, UI compartida y entrega WebSub en responsabilidades explícitas.",
+      "Proteger tenancy y RBAC en el servidor; la interfaz sólo refleja permisos ya autorizados.",
+      "Coordinar publicación, revalidación, RSS/WebSub, SEO y reintentos sin acoplar el backend editorial al portal.",
     ],
-    filters: ["Backend", "Editorial"],
-    decorativeGlyph: "運用",
+    evidence: [
+      "Backend y CMS en producción",
+      "RBAC y multitenancy",
+      "Jobs e integraciones",
+      "Portales, SEO y analítica",
+    ],
+    stack: ["Node.js", "PostgreSQL", "React", "Next.js", "AWS S3", "WebSub"],
+    media: {
+      src: elEditorVisual,
+      alt: "Mockups de notebook, tablet y teléfono mostrando las métricas de El Editor CMS",
+      caption: "Experiencia responsive · interfaz con datos sintéticos",
+    },
     links: [
       {
         label: "Pedir caso técnico",
-        href: `mailto:${profile.email}?subject=Caso%20tecnico%20-%20El%20Editor%20CMS`,
+        href: gmailComposeHref("Caso técnico - El Editor CMS"),
+        external: true,
       },
     ],
   },
   {
+    id: "elementos",
     index: "02",
-    title: "DATAMARK",
-    description:
-      "MVP B2B SaaS para ventas, inventario, clientes y dashboards analíticos. Backend en capas con TypeScript, Express, PostgreSQL, Prisma y JWT/RBAC.",
-    tags: ["TypeScript", "Express", "PostgreSQL", "Prisma", "React"],
-    filters: ["Backend", "SaaS"],
-    decorativeGlyph: "事業",
+    title: "Elementos",
+    status: "Producto privado",
+    prominence: "featured",
+    summary:
+      "Marketplace de materiales de construcción con portal comprador, backoffice comercial, identidad, catálogo, ofertas e inventario.",
+    problem:
+      "Conectar compradores, comercios y operación interna sobre un catálogo consistente, con límites claros entre dominios.",
+    responsibility:
+      "Diseñé e implementé el backend modular del marketplace: identidad, seguridad, catálogo, comercios, ofertas, media, discovery, inventario y reservas. También diagramé flujos y casos de uso.",
+    decisions: [
+      "Traducir los recorridos de comprador, comercio y backoffice en flujos y casos de uso compartidos por producto y desarrollo.",
+      "Organizar el backend como monolito modular por dominio y comunicar capacidades mediante superficies públicas.",
+      "Mantener OpenAPI como contrato consumible y verificar rutas, respuestas y escenarios críticos.",
+      "Separar catálogo, estado comercial, disponibilidad e identidad para preservar sus invariantes.",
+    ],
+    evidence: [
+      "Backend modular",
+      "Auth y seguridad",
+      "Inventario y reservas",
+      "OpenAPI y performance",
+    ],
+    stack: ["Node.js", "Express", "PostgreSQL", "Sequelize", "Next.js", "React"],
+    media: {
+      src: elementosVisual,
+      alt: "Mockups de notebook, tablet y teléfono mostrando una ficha de producto de Elementos",
+      caption: "Experiencia responsive · contenido de demostración",
+    },
     links: [
       {
-        label: "Repositorio",
-        href: "https://github.com/EzePacheco/S02-26-Equipo-50-Data-Science",
+        label: "Pedir caso técnico",
+        href: gmailComposeHref("Caso técnico - Elementos"),
         external: true,
       },
     ],
   },
   {
+    id: "minecall",
     index: "03",
-    title: "Sistema de Gestión de Noticias",
-    description:
-      "Plataforma editorial open source con API REST modular, JWT, roles, testing, CI, publicación de noticias y frontend administrativo.",
-    tags: ["Node.js", "Express", "MongoDB", "Docker", "GitHub Actions"],
-    filters: ["Backend", "Editorial"],
-    decorativeGlyph: "記事",
+    title: "MineCall",
+    status: "Demo pública",
+    prominence: "compact",
+    summary:
+      "Oficina virtual voxel con presencia, chat y audio/video por proximidad en tiempo real.",
+    problem:
+      "Sostener una experiencia realtime fluida con presencia efímera, media por proximidad y estado durable.",
+    responsibility:
+      "Diseñé y desarrollé gran parte de la plataforma full stack: API Go, datos, realtime, media por proximidad, billing, Control Center y experiencia web. Las decisiones de negocio se trabajaron con un socio.",
+    decisions: [
+      "Separar mutaciones durables por HTTP de presencia y movimiento por WebSocket.",
+      "Usar PostgreSQL como autoridad durable y Redis/outbox para coordinación horizontal.",
+      "Aplicar proximidad de media server-side con LiveKit y verificarla con browsers reales.",
+    ],
+    evidence: ["API Go y PostgreSQL", "Realtime y LiveKit", "Billing y administración", "E2E full stack"],
+    stack: ["Go", "PostgreSQL", "WebSocket", "Redis", "LiveKit", "Three.js"],
+    media: {
+      src: mineCallVisual,
+      alt: "Mundo voxel de MineCall con oficinas, avatar y controles de llamada",
+      caption: "Demo pública con identidad ficticia",
+    },
     links: [
       {
-        label: "Backend",
-        href: "https://github.com/Marco21c/backend-noticias",
-        external: true,
-      },
-      {
-        label: "Frontend",
-        href: "https://github.com/Marco21c/front-noticias",
+        label: "Abrir MineCall",
+        href: "https://minecall-859734929961.southamerica-east1.run.app/",
         external: true,
       },
     ],
   },
   {
+    id: "chichitos-ecommerce",
     index: "04",
-    title: "Nail Studio API",
-    description:
-      "API de turnos con disponibilidad en tiempo real, prevención de solapamientos, autenticación JWT, roles ADMIN/STAFF y carga de imágenes.",
-    tags: ["Node.js", "TypeScript", "PostgreSQL", "Prisma", "Docker"],
-    filters: ["Backend", "API"],
-    decorativeGlyph: "予約",
+    title: "Chichitos",
+    status: "Tienda pública",
+    prominence: "compact",
+    summary:
+      "Ecommerce para una marca argentina de indumentaria infantil personalizada y estampada a pedido.",
+    problem:
+      "Convertir un catálogo configurable en una compra segura con precio, stock, envío y pago validados en servidor.",
+    responsibility:
+      "Desarrollé el producto end-to-end: storefront, administración, catálogo, stock y reservas, checkout, persistencia, pagos y despliegue.",
+    decisions: [
+      "Recalcular carrito, precios y envío en el servidor antes de crear el pago.",
+      "Confirmar pagos mediante webhook firmado e idempotente.",
+      "Separar UI pública, capacidades de producto, casos de uso y adaptadores.",
+    ],
+    evidence: ["Storefront y admin", "Stock y reservas", "Pagos idempotentes", "Tests y despliegue"],
+    stack: ["Next.js", "TypeScript", "Supabase", "Mercado Pago", "Google Maps"],
+    media: {
+      src: chichitosVisual,
+      alt: "Portada pública del ecommerce Chichitos",
+      caption: "Storefront público sin datos personales",
+    },
     links: [
       {
-        label: "Repositorio",
-        href: "https://github.com/EzePacheco/nail-studio-api",
+        label: "Abrir tienda",
+        href: "https://chichitos-web.vercel.app/",
         external: true,
       },
-    ],
-  },
-  {
-    index: "05",
-    title: "Chichitos Ecommerce",
-    description:
-      "Ecommerce full-stack para marca de indumentaria infantil. Next.js App Router, TypeScript, Supabase, Mercado Pago, Vercel y documentación arquitectónica.",
-    tags: ["Next.js", "TypeScript", "Supabase", "Mercado Pago", "Vercel"],
-    filters: ["Frontend", "Ecommerce"],
-    decorativeGlyph: "商い",
-    links: [
       {
-        label: "Repositorio",
+        label: "Ver repositorio",
         href: "https://github.com/EzePacheco/chichitos-ecommerce",
         external: true,
       },
     ],
   },
-];
-
-export const processSteps: ProcessStep[] = [
   {
-    index: "01",
-    glyph: "一",
-    title: "Entiendo el dominio",
-    description:
-      "Actores, permisos, reglas de negocio y criterios de aceptación.",
-  },
-  {
-    index: "02",
-    glyph: "二",
-    title: "Modelo los datos",
-    description: "Tablas, relaciones, migraciones, estados y ownership.",
-  },
-  {
-    index: "03",
-    glyph: "三",
-    title: "Diseño contratos",
-    description:
-      "APIs claras, validaciones, errores consistentes y respuestas estables.",
-  },
-  {
-    index: "04",
-    glyph: "四",
-    title: "Protejo el sistema",
-    description:
-      "JWT, RBAC, tenants, sanitización, HMAC y operaciones sensibles.",
-  },
-  {
+    id: "chemical-software",
     index: "05",
-    glyph: "五",
-    title: "Pienso en producción",
-    description:
-      "Logs, health checks, retries, testing, deploy y mantenimiento.",
-  },
-];
-
-export const stackGroups: StackGroup[] = [
-  {
-    title: "Backend",
-    items: ["Node.js", "Express.js", "REST APIs", "JWT/RBAC", "HMAC"],
-  },
-  {
-    title: "Datos",
-    items: ["PostgreSQL", "Sequelize", "Prisma", "SQL", "Umzug"],
-  },
-  {
-    title: "Frontend",
-    items: ["React", "Next.js", "Vite", "Sass", "Tailwind CSS"],
-  },
-  {
-    title: "Calidad",
-    items: [
-      "Vitest",
-      "Supertest",
-      "node:test",
-      "API testing",
-      "Documentación técnica",
+    title: "Chemical Software",
+    status: "SaaS en desarrollo",
+    prominence: "compact",
+    summary:
+      "SaaS de gestión para catálogo, stock, compras, ventas, pedidos y cuentas corrientes con operación multi-comercio.",
+    problem:
+      "Unificar la operación diaria del negocio sin perder contexto de empresa, sucursal, rol ni trazabilidad de inventario.",
+    responsibility:
+      "Implementé capacidades críticas del backend en NestJS: multitenancy, autenticación y membresías, inventario, recepciones, costos de compra y auditoría. También trabajé en frontend, contratos OpenAPI, migraciones, E2E y CI.",
+    decisions: [
+      "Modelar compañía y sucursal como contextos distintos para preservar el aislamiento multi-tenant.",
+      "Validar membresías y roles en el servidor y mantener trazabilidad sobre cambios sensibles.",
+      "Resolver recepciones, ajustes y costos de compra como operaciones consistentes y auditables.",
+      "Traducir la operación en casos de uso y flujos específicos por rol.",
+    ],
+    evidence: ["Backend NestJS", "Migraciones y OpenAPI", "E2E de negocio", "Flujos y producto"],
+    stack: ["NestJS", "PostgreSQL", "TypeORM", "React", "TanStack Query", "Zod"],
+    media: {
+      src: chemicalSoftwareVisual,
+      alt: "Mockup sintético de Chemical Software con dashboard operativo y catálogo",
+      caption: "Mockup sintético · sin datos reales",
+    },
+    links: [
+      {
+        label: "Pedir caso técnico",
+        href: gmailComposeHref("Caso técnico - Chemical Software"),
+        external: true,
+      },
     ],
   },
   {
-    title: "DevOps",
-    items: [
-      "Docker",
-      "GitHub Actions",
-      "AWS S3",
-      "Postman",
-      "Health/Readiness checks",
+    id: "memoriesai",
+    index: "06",
+    title: "MemoriesAI",
+    status: "Proyecto propio",
+    prominence: "compact",
+    summary:
+      "Segundo cerebro compartido para que distintos agentes recuperen contexto durable sin reemplazar la autoridad del código.",
+    problem:
+      "Preservar decisiones y aprendizajes entre sesiones sin convertir conversaciones o snapshots en verdad técnica.",
+    responsibility:
+      "Diseñé e implementé el modelo de memoria, lifecycle, CLI, retrieval, receipts, guardas, instalador y distribución del harness multiagente.",
+    decisions: [
+      "Mantener una sola autoridad por pregunta y confirmar los hechos en el repositorio del producto.",
+      "Separar memoria durable de progreso transitorio mediante receipts.",
+      "Usar retrieval lexical, grafo y tiempo con procedencia explícita y gates verificables.",
     ],
-  },
-  {
-    title: "Dominios",
-    items: [
-      "CMS editorial",
-      "SaaS B2B",
-      "Ecommerce",
-      "Analytics",
-      "WebSub/RSS",
+    evidence: ["CLI y retrieval", "Lifecycle y receipts", "Guardas y evidencia", "Harness portable"],
+    stack: ["Python", "Git", "Markdown", "BM25", "Codex", "Claude"],
+    media: {
+      src: memoriesAiVisual,
+      alt: "Terminal de demostración de MemoriesAI con briefing, evidencia y cierre de sesión",
+      caption: "Salida sintética sin datos privados",
+    },
+    links: [
+      {
+        label: "Pedir caso técnico",
+        href: gmailComposeHref("Caso técnico - MemoriesAI"),
+        external: true,
+      },
     ],
   },
 ];
 
 export const experience: ExperienceItem[] = [
   {
-    date: "Marzo 2026 — Actualidad",
+    date: "Mar 2026 — Actualidad",
     company: "DELSUD",
     role: "Full Stack Developer · Backend-Oriented",
     description:
-      "CMS y portales públicos multitenant para medios digitales. Backend, APIs, datos, auth, integraciones y CMS Panel.",
+      "Desarrollo full stack de CMS, portales multisitio y backend de marketplace: APIs, datos, autenticación, integraciones e interfaces.",
   },
   {
-    date: "Febrero 2026 — Marzo 2026",
+    date: "Feb — Mar 2026",
     company: "DATAMARK",
     role: "Fullstack Lead & Full Stack Developer",
     description:
-      "MVP B2B SaaS con backend en capas, JWT/RBAC, PostgreSQL, Prisma y dashboards analíticos.",
+      "MVP B2B SaaS para ventas, inventario, clientes y analítica con backend en capas y PostgreSQL.",
   },
   {
-    date: "Septiembre 2023 — Abril 2026",
+    date: "Sep 2023 — Abr 2026",
     company: "Burgers Thrones",
     role: "Fundador & Responsable de Operaciones",
     description:
-      "Operación, stock, métricas, atención al cliente y toma de decisiones basada en datos.",
+      "Operación, stock, atención al cliente y decisiones de negocio apoyadas en datos.",
   },
   {
     date: "2019 — 2023",
     company: "Grupo MSA",
     role: "Técnico de Producción & QA",
     description:
-      "Testing funcional de hardware/software, reportes de incidencias y detección de defectos críticos.",
+      "Testing funcional de hardware y software, diagnóstico y reporte de defectos críticos.",
+  },
+];
+
+export const capabilities: Capability[] = [
+  {
+    index: "01",
+    title: "Backend y datos",
+    description:
+      "Diseño APIs, módulos y modelos de datos con contratos, permisos y consistencia explícitos.",
+    items: ["Node.js", "NestJS", "Go", "REST", "WebSocket", "PostgreSQL", "Redis"],
+  },
+  {
+    index: "02",
+    title: "Full stack e interfaces",
+    description:
+      "Implemento paneles, portales y experiencias web conectadas a contratos y reglas reales del sistema.",
+    items: ["TypeScript", "React", "Next.js", "Astro", "CMS", "Ecommerce"],
+  },
+  {
+    index: "03",
+    title: "Calidad, operación y producto",
+    description:
+      "Verifico los flujos críticos y sumo contexto de negocio, casos de uso y decisiones de producto.",
+    items: ["E2E", "Contratos", "CI", "Observabilidad", "Casos de uso", "User flows"],
   },
 ];
 
 export const contact = {
-  eyebrow: "Contacto / 連絡",
-  title: "Construyamos algo claro, sólido y mantenible.",
+  eyebrow: "Hablemos",
+  title: "¿Tenés un producto que necesita claridad técnica?",
   description:
-    "Puedo ayudar en backend Node.js, APIs REST, PostgreSQL, CMS, SaaS, dashboards, autenticación, permisos, integraciones y mantenimiento de productos en producción.",
+    "Puedo aportar backend, APIs, datos, integraciones y desarrollo full stack, con ownership técnico y criterio de producto.",
   links: [links.email, links.linkedin, links.github],
-  copyButton: {
-    label: "Copiar email",
-    successLabel: "Email copiado",
-    failureLabel: "No se pudo copiar",
-  },
 };
