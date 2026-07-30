@@ -17,15 +17,19 @@ import { capabilities } from "../../data/portfolio.data";
 
   <div class="capability-grid">
     {
-      capabilities.map((capability) => (
-        <article class="capability" data-enter>
-          <span>{capability.index}</span>
-          <h3>{capability.title}</h3>
-          <p>{capability.description}</p>
-          <ul>
-            {capability.items.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
+      capabilities.map((capability, index) => (
+        <details class="capability" name="capabilities" open={index === 0} data-enter>
+          <summary>
+            <span>{capability.index}</span>
+            <h3>{capability.title}</h3>
+          </summary>
+          <div class="capability-body">
+            <p>{capability.description}</p>
+            <ul>
+              {capability.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </details>
       ))
     }
   </div>
