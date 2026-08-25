@@ -159,8 +159,13 @@ export const projects: Project[] = [
     },
     links: [
       {
-        label: "Pedir caso técnico",
-        href: gmailComposeHref("Caso técnico - El Editor CMS"),
+        label: "Abrir El Editor Platense",
+        href: "https://eleditorplatense.com/",
+        external: true,
+      },
+      {
+        label: "Abrir El Editor Mendoza",
+        href: "https://eleditormendoza.com.ar/",
         external: true,
       },
     ],
@@ -197,8 +202,8 @@ export const projects: Project[] = [
     },
     links: [
       {
-        label: "Pedir caso técnico",
-        href: gmailComposeHref("Caso técnico - Elementos"),
+        label: "Abrir portal de prueba",
+        href: "https://portaltest.elementosconstruccion.com.ar/",
         external: true,
       },
     ],
@@ -230,7 +235,7 @@ export const projects: Project[] = [
     links: [
       {
         label: "Abrir MineCall",
-        href: "https://minecall-859734929961.southamerica-east1.run.app/",
+        href: "https://minecall.online/",
         external: true,
       },
     ],
