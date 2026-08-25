@@ -1,9 +1,0 @@
----
-import CvPage from '../../components/CvPage.astro';
-import { getPortfolio } from '../../data/portfolio.data';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-const content = getPortfolio('es');
----
-<BaseLayout locale="es" title={`CV | ${content.profile.name}`} description={`CV de ${content.profile.name}`} ogImage={content.metadata.ogImage} alternatePath="/en/cv/" printable>
-  <CvPage content={content} />
-</BaseLayout>

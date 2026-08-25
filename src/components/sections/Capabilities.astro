@@ -1,0 +1,36 @@
+---
+import { capabilities } from "../../data/portfolio.data";
+---
+
+<section id="capacidades" class="capabilities" aria-labelledby="capacidades-title">
+  <div class="section-intro" data-enter>
+    <span class="section-num" aria-hidden="true">03</span>
+    <div>
+      <p class="section-kicker">Cómo aporto</p>
+      <h2 id="capacidades-title">Capacidades conectadas a sistemas reales.</h2>
+    </div>
+    <p>
+      La tecnología aparece como herramienta de una responsabilidad concreta, no como una lista
+      aislada de logos.
+    </p>
+  </div>
+
+  <div class="capability-grid">
+    {
+      capabilities.map((capability, index) => (
+        <details class="capability" name="capabilities" open={index === 0} data-enter>
+          <summary>
+            <span>{capability.index}</span>
+            <h3>{capability.title}</h3>
+          </summary>
+          <div class="capability-body">
+            <p>{capability.description}</p>
+            <ul>
+              {capability.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+</section>

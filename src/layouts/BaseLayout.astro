@@ -1,42 +1,69 @@
 ---
-import '@fontsource-variable/manrope';
-import '@fontsource-variable/ibm-plex-sans';
-import '../styles/global.css';
-import type { Locale } from '../data/portfolio.data';
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/ibm-plex-sans";
+import "../styles/tokens.css";
+import "../styles/global.css";
 
-type Props = {
-  locale: Locale;
+interface Props {
   title: string;
   description: string;
-  ogImage: string;
-  alternatePath: string;
-  printable?: boolean;
-};
+  ogImage?: string;
+}
 
-const { locale, title, description, ogImage, alternatePath, printable = false } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={locale === 'es' ? 'es-AR' : 'en'}>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f5eddf" />
+    <meta name="theme-color" content="#030303" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content={locale === 'es' ? 'es_AR' : 'en_US'} />
+    <meta property="og:locale" content="es_AR" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <link rel="alternate" hreflang={locale === 'es' ? 'en' : 'es'} href={alternatePath} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body class:list={{ printable }}>
+  <body>
+    <a class="skip-link" href="#inicio">Saltar al contenido</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <slot />
+    <script is:inline>
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const enterTargets = Array.from(document.querySelectorAll("[data-enter]"));
+      const siteHeader = document.querySelector(".site-header");
+
+      const syncHeader = () => {
+        siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+      };
+
+      syncHeader();
+      window.addEventListener("scroll", syncHeader, { passive: true });
+
+      if (!reducedMotion && "IntersectionObserver" in window) {
+        const enterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.remove("enter-pending");
+              entry.target.classList.add("enter-visible");
+              enterObserver.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
+        );
+
+        enterTargets.forEach((target, index) => {
+          if (target.getBoundingClientRect().top <= window.innerHeight * 0.92) return;
+          target.style.setProperty("--enter-delay", `${Math.min(index % 3, 2) * 55}ms`);
+          target.classList.add("enter-pending");
+          enterObserver.observe(target);
+        });
+      }
+    </script>
   </body>
 </html>

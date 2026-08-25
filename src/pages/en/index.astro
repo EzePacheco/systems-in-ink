@@ -1,9 +1,0 @@
----
-import HomePage from '../../components/HomePage.astro';
-import { getPortfolio } from '../../data/portfolio.data';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-const content = getPortfolio('en');
----
-<BaseLayout locale="en" title={content.metadata.title} description={content.metadata.description} ogImage={content.metadata.ogImage} alternatePath="/">
-  <HomePage content={content} />
-</BaseLayout>

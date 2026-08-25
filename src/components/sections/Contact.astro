@@ -1,0 +1,36 @@
+---
+import { contact, links } from "../../data/portfolio.data";
+---
+
+<section id="contacto" class="contact" aria-labelledby="contacto-title">
+  <div class="contact-copy" data-enter>
+    <p class="section-kicker">{contact.eyebrow}</p>
+    <h2 id="contacto-title">{contact.title}</h2>
+    <p>{contact.description}</p>
+    <a
+      class="btn btn-primary contact-cta"
+      href={links.email.href}
+      target="_blank"
+      rel="noreferrer"
+    >
+      Escribirme
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="contact-links" aria-label="Canales de contacto" data-enter>
+    {
+      contact.links.map((link) => (
+        <a
+          href={link.href}
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noreferrer" : undefined}
+        >
+          <span>{link.label}</span>
+          <strong>{link.display}</strong>
+          <span aria-hidden="true">↗</span>
+        </a>
+      ))
+    }
+  </div>
+</section>

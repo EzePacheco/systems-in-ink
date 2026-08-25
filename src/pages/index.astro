@@ -1,9 +1,20 @@
 ---
-import HomePage from '../components/HomePage.astro';
-import { getPortfolio } from '../data/portfolio.data';
-import BaseLayout from '../layouts/BaseLayout.astro';
-const content = getPortfolio('es');
+import EditorialFrame from "../components/layout/EditorialFrame.astro";
+import Capabilities from "../components/sections/Capabilities.astro";
+import CaseStudies from "../components/sections/CaseStudies.astro";
+import Contact from "../components/sections/Contact.astro";
+import Experience from "../components/sections/Experience.astro";
+import Hero from "../components/sections/Hero.astro";
+import { metadata } from "../data/portfolio.data";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
-<BaseLayout locale="es" title={content.metadata.title} description={content.metadata.description} ogImage={content.metadata.ogImage} alternatePath="/en/">
-  <HomePage content={content} />
+
+<BaseLayout title={metadata.title} description={metadata.description} ogImage={metadata.ogImage}>
+  <EditorialFrame>
+    <Hero />
+    <Experience />
+    <CaseStudies />
+    <Capabilities />
+    <Contact />
+  </EditorialFrame>
 </BaseLayout>

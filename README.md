@@ -1,6 +1,7 @@
 # Portfolio de Ezequiel Pacheco
 
-Casebook bilingüe construido con Astro. Presenta a Ezequiel como Product Builder & Full-Stack Engineer mediante tres casos profundos, experiencia profesional, trabajo secundario, sistemas de ingeniería y CV derivados.
+Portfolio personal construido con Astro. Presenta seis casos de producto: El Editor CMS,
+Elementos, MineCall, Chichitos Ecommerce, Chemical Software y MemoriesAI.
 
 ## Desarrollo local
 
@@ -11,23 +12,23 @@ npm install
 npm run dev
 ```
 
-## Verificación y artefactos
+El servidor de desarrollo queda disponible en `http://localhost:4321`.
+
+## Verificación
 
 ```bash
 npm run lint
 npm run build
-npm run test:e2e
-npm run og:generate
-npm run cv:generate
-npm run cv:check
+npm run preview
 ```
 
-`src/data/portfolio.data.ts` es la única autoridad de perfil, experiencia, casos, CV y provenance de assets. Las páginas ES/EN, metadata, OG y los PDF consumen esa fuente. Los assets no dependen de MemoriesAI en runtime.
+`npm run lint` ejecuta el chequeo estático de Astro y TypeScript. `npm run build` genera el sitio
+estático en `dist/`.
 
-`assetEvidence` registra para cada media producto, origen, datos públicos, sintéticos o explicativos, claim seguro, prohibiciones y fecha de revisión. El Editor sólo usa un diagrama rotulado; sus PNG retenidos no participan del sitio.
+## Contenido y privacidad
 
-Los PDF derivados son `public/Ezequiel_Pacheco_CV_ES.pdf` y `public/Ezequiel_Pacheco_CV_EN.pdf`. La publicación y el deploy requieren autorización separada.
+El contenido central vive en `src/data/portfolio.data.ts`. Las capturas de productos privados usan
+entornos de demostración o contenido sintético; no deben incorporar datos personales, credenciales,
+rutas internas ni información real de clientes.
 
-## Decisiones
-
-- [ADR 0001](docs/adr/0001-contenido-localizado-y-cv-derivado.md): autoridad localizada compartida y CV derivado.
+El repositorio sólo genera artefactos locales. La publicación requiere una autorización separada.
