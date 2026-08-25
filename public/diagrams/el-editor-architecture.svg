@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">El Editor: responsabilidades de publicación</title>
+  <desc id="desc">Diagrama explicativo que conecta CMS, API editorial, publicación derivada y portales multisitio.</desc>
+  <rect width="1200" height="700" fill="#f5eddf"/>
+  <text x="70" y="82" fill="#1d1915" font-family="Manrope, sans-serif" font-size="36" font-weight="700">EL EDITOR · DIAGRAMA EXPLICATIVO</text>
+  <g font-family="IBM Plex Sans, sans-serif">
+    <rect x="70" y="170" width="230" height="150" rx="12" fill="#aa3027"/>
+    <text x="105" y="230" fill="#fff" font-size="25" font-weight="700">CMS</text><text x="105" y="268" fill="#fff" font-size="18">edición · permisos</text>
+    <rect x="485" y="145" width="230" height="200" rx="12" fill="#1d1915"/>
+    <text x="525" y="215" fill="#fff" font-size="25" font-weight="700">API editorial</text><text x="525" y="255" fill="#d8c9af" font-size="18">contenido · media</text><text x="525" y="286" fill="#d8c9af" font-size="18">RBAC · tenancy</text>
+    <rect x="900" y="170" width="230" height="150" rx="12" fill="#d8c9af"/>
+    <text x="935" y="230" fill="#1d1915" font-size="25" font-weight="700">Publicación</text><text x="935" y="268" fill="#52483d" font-size="18">jobs · revalidación</text>
+    <path d="M300 245h160" stroke="#aa3027" stroke-width="6"/><path d="m445 229 24 16-24 16" fill="none" stroke="#aa3027" stroke-width="6"/>
+    <path d="M715 245h160" stroke="#aa3027" stroke-width="6"/><path d="m860 229 24 16-24 16" fill="none" stroke="#aa3027" stroke-width="6"/>
+    <path d="M1015 320v120" stroke="#aa3027" stroke-width="6"/><path d="m999 425 16 24 16-24" fill="none" stroke="#aa3027" stroke-width="6"/>
+    <rect x="310" y="465" width="580" height="130" rx="12" fill="#fff" stroke="#b9aa93" stroke-width="2"/>
+    <text x="355" y="520" fill="#aa3027" font-size="20" font-weight="700">PORTALES MULTISITIO</text>
+    <text x="355" y="560" fill="#52483d" font-size="18">identidad visual · contenido derivado · SEO</text>
+    <path d="M900 530H890" stroke="#aa3027" stroke-width="6"/>
+  </g>
+</svg>
