@@ -1,0 +1,65 @@
+{
+  "reviewedAt": "2026-08-25",
+  "assets": [
+    {
+      "product": "MineCall",
+      "file": "minecall-real.webp",
+      "origin": "MineCall origin/main@c01d35; isolated full-stack Playwright",
+      "data": "synthetic",
+      "safeClaim": "Persistent multi-user world, world building and proximity calls",
+      "prohibitions": [
+        "No real-user attribution",
+        "No adoption or scale claims",
+        "No simultaneous collaborative editing claim"
+      ]
+    },
+    {
+      "product": "Chichitos",
+      "file": "chichitos-real.webp",
+      "origin": "Public Chichitos storefront",
+      "data": "public-product",
+      "safeClaim": "A catalog and configurable product detail exist",
+      "prohibitions": [
+        "No persistent-cart claim",
+        "No payment or sales claim",
+        "No multiple-active-variants claim"
+      ]
+    },
+    {
+      "product": "El Editor",
+      "file": "el-editor-real.webp",
+      "origin": "Public El Editor Platense portal",
+      "data": "public-product",
+      "safeClaim": "A public editorial portal and section-based navigation exist",
+      "prohibitions": ["No internal CMS or metrics claim from the capture"]
+    },
+    {
+      "product": "Elementos",
+      "file": "elementos-real.webp",
+      "origin": "Elementos demo portal",
+      "data": "product-demo",
+      "safeClaim": "The portal organizes construction categories and product discovery",
+      "prohibitions": ["No synchronized-stock, transaction or adoption claim"]
+    },
+    {
+      "product": "Chemical Software",
+      "file": "chemical-software-reference.webp",
+      "origin": "Approved Química Don Carlos catalog and inventory prototype",
+      "data": "synthetic-prototype",
+      "safeClaim": "The approved master-detail concept unifies catalog, variants and branch inventory",
+      "prohibitions": [
+        "Do not present the prototype as a production capture",
+        "Do not claim the full surface is integrated"
+      ]
+    },
+    {
+      "product": "MemoriesAI",
+      "file": "memoriesai-diagram.webp",
+      "source": "memoriesai-diagram.svg",
+      "origin": "Repository architecture and operating model",
+      "data": "technical-diagram",
+      "safeClaim": "Shared memory links evidence, decisions and learnings while repositories remain authoritative",
+      "prohibitions": ["Do not present the diagram as a user interface"]
+    }
+  ]
+}

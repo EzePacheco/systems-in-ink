@@ -1,10 +1,10 @@
 import type { ImageMetadata } from "astro";
-import chichitosVisual from "../assets/cases/chichitos.png";
-import chemicalSoftwareVisual from "../assets/cases/chemical-software-mockup.png";
-import elEditorVisual from "../assets/cases/el-editor-responsive-mockup.png";
-import elementosVisual from "../assets/cases/elementos-responsive-mockup.png";
-import memoriesAiVisual from "../assets/cases/memoriesai-terminal.svg";
-import mineCallVisual from "../assets/cases/minecall.png";
+import chichitosVisual from "../assets/cases/chichitos-real.webp";
+import chemicalSoftwareVisual from "../assets/cases/chemical-software-reference.webp";
+import elEditorVisual from "../assets/cases/el-editor-real.webp";
+import elementosVisual from "../assets/cases/elementos-real.webp";
+import memoriesAiVisual from "../assets/cases/memoriesai-diagram.webp";
+import mineCallVisual from "../assets/cases/minecall-real.webp";
 
 export type LinkItem = {
   label: string;
@@ -154,8 +154,8 @@ export const projects: Project[] = [
     stack: ["Node.js", "PostgreSQL", "React", "Next.js", "AWS S3", "WebSub"],
     media: {
       src: elEditorVisual,
-      alt: "Mockups de notebook, tablet y teléfono mostrando las métricas de El Editor CMS",
-      caption: "Experiencia responsive · interfaz con datos sintéticos",
+      alt: "Sección Deportes del portal público El Editor Platense",
+      caption: "Portal público · captura verificada",
     },
     links: [
       {
@@ -169,7 +169,7 @@ export const projects: Project[] = [
     id: "elementos",
     index: "02",
     title: "Elementos",
-    status: "Producto privado",
+    status: "Producto en desarrollo",
     prominence: "featured",
     summary:
       "Marketplace de materiales de construcción con portal comprador, backoffice comercial, identidad, catálogo, ofertas e inventario.",
@@ -192,8 +192,8 @@ export const projects: Project[] = [
     stack: ["Node.js", "Express", "PostgreSQL", "Sequelize", "Next.js", "React"],
     media: {
       src: elementosVisual,
-      alt: "Mockups de notebook, tablet y teléfono mostrando una ficha de producto de Elementos",
-      caption: "Experiencia responsive · contenido de demostración",
+      alt: "Inicio real del portal Elementos con categorías de materiales para la construcción",
+      caption: "Portal de demostración · captura verificada",
     },
     links: [
       {
@@ -224,8 +224,8 @@ export const projects: Project[] = [
     stack: ["Go", "PostgreSQL", "WebSocket", "Redis", "LiveKit", "Three.js"],
     media: {
       src: mineCallVisual,
-      alt: "Mundo voxel de MineCall con oficinas, avatar y controles de llamada",
-      caption: "Demo pública con identidad ficticia",
+      alt: "Mundo persistente de MineCall con avatares sintéticos dentro de un espacio construido",
+      caption: "E2E full stack aislado · identidades sintéticas",
     },
     links: [
       {
@@ -256,8 +256,8 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Supabase", "Mercado Pago", "Google Maps"],
     media: {
       src: chichitosVisual,
-      alt: "Portada pública del ecommerce Chichitos",
-      caption: "Storefront público sin datos personales",
+      alt: "Detalle público de una prenda configurable en el storefront de Chichitos",
+      caption: "Storefront público · sin datos personales",
     },
     links: [
       {
@@ -294,8 +294,8 @@ export const projects: Project[] = [
     stack: ["NestJS", "PostgreSQL", "TypeORM", "React", "TanStack Query", "Zod"],
     media: {
       src: chemicalSoftwareVisual,
-      alt: "Mockup sintético de Chemical Software con dashboard operativo y catálogo",
-      caption: "Mockup sintético · sin datos reales",
+      alt: "Prototipo visual aprobado de Chemical Software con catálogo e inventario y datos sintéticos",
+      caption: "Prototipo aprobado · datos sintéticos",
     },
     links: [
       {
@@ -326,8 +326,8 @@ export const projects: Project[] = [
     stack: ["Python", "Git", "Markdown", "BM25", "Codex", "Claude"],
     media: {
       src: memoriesAiVisual,
-      alt: "Terminal de demostración de MemoriesAI con briefing, evidencia y cierre de sesión",
-      caption: "Salida sintética sin datos privados",
+      alt: "Diagrama técnico de MemoriesAI con repositorios, evidencia, memoria y agentes coordinados",
+      caption: "Diagrama técnico · sin datos privados",
     },
     links: [
       {
