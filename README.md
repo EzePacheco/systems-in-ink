@@ -1,7 +1,8 @@
 # Portfolio de Ezequiel Pacheco
 
-Portfolio personal construido con Astro. Presenta seis casos de producto: El Editor CMS,
-Elementos, MineCall, Chichitos Ecommerce, Chemical Software y MemoriesAI.
+Portfolio profesional construido con Astro. Presenta casos de backend y producto end-to-end:
+Elementos, El Editor, MineCall, Cercaya, Chemical Software y MemoriesAI; además de Chichitos
+y DATAMARK como proyectos complementarios.
 
 ## Desarrollo local
 
@@ -31,4 +32,5 @@ El contenido central vive en `src/data/portfolio.data.ts`. Las capturas de produ
 entornos de demostración o contenido sintético; no deben incorporar datos personales, credenciales,
 rutas internas ni información real de clientes.
 
-El repositorio sólo genera artefactos locales. La publicación requiere una autorización separada.
+El repositorio genera un sitio estático y el PDF descargable del CV. Antes de publicar, verificar
+que el contenido no exponga información privada ni referencias de empleadores que deban anonimizarse.

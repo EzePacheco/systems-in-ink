@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Foundation de evidencia privada de Cercaya</title>
+  <desc id="desc">Diagrama conceptual con un solicitante, autorización contextual, evidencia privada, auditoría e integridad.</desc>
+  <rect width="1200" height="760" fill="#f4f4f1"/>
+  <rect x="70" y="84" width="1060" height="592" rx="30" fill="#24241f"/>
+  <text x="130" y="165" fill="#f2efe6" font-family="Arial, sans-serif" font-size="34" font-weight="700">Cercaya · Evidence Foundation</text>
+  <text x="130" y="205" fill="#c9c2b3" font-family="Arial, sans-serif" font-size="20">Privacidad, integridad y autorización contextual</text>
+  <g font-family="Arial, sans-serif">
+    <g transform="translate(130 286)">
+      <rect width="214" height="196" rx="16" fill="#393932"/>
+      <text x="24" y="48" fill="#ffdb89" font-size="18" font-weight="700">Solicitud</text>
+      <text x="24" y="84" fill="#f2efe6" font-size="16">actor local</text>
+      <text x="24" y="112" fill="#f2efe6" font-size="16">ownership</text>
+      <text x="24" y="140" fill="#f2efe6" font-size="16">idempotencia</text>
+    </g>
+    <g transform="translate(493 286)">
+      <rect width="214" height="196" rx="16" fill="#ffdb89"/>
+      <text x="24" y="48" fill="#24241f" font-size="18" font-weight="700">Evidencia</text>
+      <text x="24" y="84" fill="#24241f" font-size="16">MIME + contenido</text>
+      <text x="24" y="112" fill="#24241f" font-size="16">SHA-256</text>
+      <text x="24" y="140" fill="#24241f" font-size="16">sin EXIF/geoloc.</text>
+    </g>
+    <g transform="translate(856 286)">
+      <rect width="214" height="196" rx="16" fill="#393932"/>
+      <text x="24" y="48" fill="#ffdb89" font-size="18" font-weight="700">Acceso</text>
+      <text x="24" y="84" fill="#f2efe6" font-size="16">grants / revoke</text>
+      <text x="24" y="112" fill="#f2efe6" font-size="16">non-enumerability</text>
+      <text x="24" y="140" fill="#f2efe6" font-size="16">auditoría</text>
+    </g>
+  </g>
+  <path d="M365 384h95m-25-14 25 14-25 14M728 384h95m-25-14 25 14-25 14" fill="none" stroke="#ffdb89" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="130" y="588" fill="#c9c2b3" font-family="Arial, sans-serif" font-size="18">Fixtures sintéticos · borrado lógico · limpieza transaccional</text>
+</svg>
