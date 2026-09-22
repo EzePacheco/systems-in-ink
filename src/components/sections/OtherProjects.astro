@@ -20,14 +20,18 @@ const { projects } = Astro.props;
       projects.map((project) => (
         <article class="compact-project" data-enter>
           <figure>
-            <Image
-              src={project.media.src}
-              alt={project.media.alt}
-              widths={[480, 720]}
-              sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 720px"
-              loading="lazy"
-              decoding="async"
-            />
+            {project.media.src ? (
+              <Image
+                src={project.media.src}
+                alt={project.media.alt}
+                widths={[480, 720]}
+                sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 720px"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="case-media-placeholder">{project.title} · nueva captura pendiente</div>
+            )}
           </figure>
 
           <div class="compact-project-copy">

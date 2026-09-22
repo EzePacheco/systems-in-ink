@@ -11,15 +11,19 @@ const { project } = Astro.props;
 
 <article id={`caso-${project.id}`} class="featured-case" data-enter>
   <figure class="case-media">
-    <Image
-      src={project.media.src}
-      alt={project.media.alt}
-      widths={[640, 960, 1440]}
-      sizes="(max-width: 1080px) 100vw, min(54vw, 778px)"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>{project.media.caption}</figcaption>
+    {project.media.src ? (
+      <Image
+        src={project.media.src}
+        alt={project.media.alt}
+        widths={[640, 960, 1440]}
+        sizes="(max-width: 1080px) 100vw, min(54vw, 778px)"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="case-media-placeholder">{project.title} · nueva captura pendiente</div>
+    )}
+    {project.media.caption && <figcaption>{project.media.caption}</figcaption>}
   </figure>
 
   <div class="case-copy">

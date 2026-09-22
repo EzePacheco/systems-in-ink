@@ -3,9 +3,7 @@ import chichitosVisual from "../assets/cases/chichitos-real.webp";
 import chemicalSoftwareVisual from "../assets/cases/chemical-software-reference.webp";
 import elEditorVisual from "../assets/cases/el-editor-real.webp";
 import elementosVisual from "../assets/cases/elementos-real.webp";
-import memoriesAiVisual from "../assets/cases/memoriesai-diagram.webp";
 import mineCallVisual from "../assets/cases/minecall-real.webp";
-import cercayaVisual from "../assets/cases/cercaya-foundation.svg";
 
 export type LinkItem = {
   label: string;
@@ -28,9 +26,9 @@ export type Project = {
   evidence: string[];
   stack: string[];
   media: {
-    src: ImageMetadata;
+    src?: ImageMetadata;
     alt: string;
-    caption: string;
+    caption?: string;
   };
   links: LinkItem[];
 };
@@ -157,7 +155,6 @@ export const projects: Project[] = [
     media: {
       src: elementosVisual,
       alt: "Inicio del portal Elementos con categorías de materiales para la construcción",
-      caption: "Portal de demostración · captura verificada",
     },
     links: [
       {
@@ -195,7 +192,6 @@ export const projects: Project[] = [
     media: {
       src: elEditorVisual,
       alt: "Sección Deportes del portal público El Editor Platense",
-      caption: "Portal público · captura verificada",
     },
     links: [
       {
@@ -233,7 +229,6 @@ export const projects: Project[] = [
     media: {
       src: mineCallVisual,
       alt: "Mundo persistente de MineCall con avatares sintéticos dentro de un espacio construido",
-      caption: "E2E full stack aislado · identidades sintéticas",
     },
     links: [
       {
@@ -264,9 +259,7 @@ export const projects: Project[] = [
     evidence: ["Java / Spring Boot modular", "Seguridad y privacidad por defecto", "Consistencia transaccional", "Integration tests con Testcontainers"],
     stack: ["Java", "Spring Boot", "Spring Modulith", "Spring JDBC", "PostgreSQL", "Flyway", "Auth0 / OIDC", "JUnit", "Testcontainers", "React Native / Expo", "Astro"],
     media: {
-      src: cercayaVisual,
-      alt: "Diagrama de la foundation de evidencia privada de Cercaya",
-      caption: "Foundation técnica · fixtures sintéticos",
+      alt: "Captura móvil futura del flujo de solicitud de Cercaya",
     },
     links: [
       {
@@ -329,9 +322,7 @@ export const projects: Project[] = [
     evidence: ["Lifecycle, provenance y ownership", "BM25 y FTS5 local", "Índices y recovery reconstruibles", "Adapter de Codex y portabilidad"],
     stack: ["Python", "BM25", "SQLite", "FTS5", "FastEmbed (experimental)", "CLI"],
     media: {
-      src: memoriesAiVisual,
-      alt: "Diagrama técnico de MemoriesAI con repositorios, evidencia, memoria y agentes coordinados",
-      caption: "Diagrama técnico · sin datos privados",
+      alt: "Captura futura de retrieval de MemoriesAI con provenance",
     },
     links: [
       {
