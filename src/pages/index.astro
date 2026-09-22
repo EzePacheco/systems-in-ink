@@ -89,11 +89,11 @@ const personSchema = {
               <p class="eyebrow">Marketplace B2B/B2C · {elementos.status}</p>
               <h3 id="elementos-title">Elementos</h3>
               <p>{elementos.summary}</p>
-              <p><strong>Mi trabajo:</strong> {elementos.responsibility}</p>
+              <p>{elementos.responsibility}</p>
               <ul class="project-points"><li>Consistencia transaccional</li><li>Pagos e integraciones</li><li>Jobs y operación</li></ul>
               <div class="links">{elementos.links.map((link) => <a href={link.href} {...external(link.external)}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
             </div>
-            <div class="elementos-media" data-project-media data-reveal="media" data-reveal-delay="70"><ProjectMedia src={elementos.media?.src} alt={elementos.media?.alt ?? ""} aspect="landscape" fit="contain" position="center top" priority /></div>
+            <div class="elementos-media" data-project-media data-reveal="media" data-reveal-delay="70"><ProjectMedia src={elementos.media?.src} alt={elementos.media?.alt ?? ""} aspect="native" fit="contain" position="center top" priority /></div>
           </div>
           <details><summary>Ver decisiones de ingeniería <span aria-hidden="true">+</span></summary><ul>{elementos.decisions.map((item) => <li>{item}</li>)}</ul></details>
         </article>
@@ -101,14 +101,14 @@ const personSchema = {
         <article class="project editor" aria-labelledby="editor-title">
           <div class="editor-layout">
             <div class="editor-copy" data-project-copy data-reveal>
-              <p class="eyebrow">CMS editorial multitenant + portales públicos · {editor.status}</p>
+              <p class="eyebrow">{editor.status}</p>
               <h3 id="editor-title">El Editor</h3>
               <p>{editor.summary}</p>
-              <p><strong>Mi trabajo:</strong> {editor.responsibility}</p>
+              <p>{editor.responsibility}</p>
               <div class="links">{editor.links.map((link) => <a href={link.href} {...external(link.external)}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
               <ul class="pills"><li>Multitenancy</li><li>RBAC</li><li>React CMS</li><li>Next.js / ISR</li><li>S3 / CloudFront</li><li>SEO / analytics</li></ul>
             </div>
-            <div class="editor-media" data-project-media data-reveal="media" data-reveal-delay="80"><ProjectMedia src={editor.media?.src} alt={editor.media?.alt ?? ""} aspect="landscape" fit="contain" position="center top" /></div>
+            <div class="editor-media" data-project-media data-reveal="media" data-reveal-delay="80"><ProjectMedia src={editor.media?.src} alt={editor.media?.alt ?? ""} aspect="native" fit="contain" position="center top" /></div>
           </div>
           <details><summary>Ver decisiones de ingeniería <span aria-hidden="true">+</span></summary><ul>{editor.decisions.map((item) => <li>{item}</li>)}</ul></details>
         </article>
@@ -129,42 +129,44 @@ const personSchema = {
 
         <section class="specialized" aria-labelledby="specialized-title">
           <header><p class="eyebrow">Casos especializados</p><h2 id="specialized-title">Seguridad, operación y producto.</h2></header>
-          <div class="special-grid">
-            <article class="cercaya" aria-labelledby="cercaya-title" data-project-copy data-reveal>
+          <article id="chemical-software" class="chemical" aria-labelledby="chemical-title">
+            <div class="chemical-layout">
+              <div class="chemical-media" data-project-media data-reveal="media"><ProjectMedia src={chemical.media?.src} alt={chemical.media?.alt ?? ""} aspect="native" fit="contain" position="center top" /></div>
+              <div class="chemical-copy" data-project-copy data-reveal>
+                <p class="eyebrow">{chemical.status}</p><h3 id="chemical-title">Chemical Software</h3>
+                <p>{chemical.summary}</p><p>{chemical.responsibility}</p>
+                <ul class="pills"><li>NestJS</li><li>PostgreSQL</li><li>TypeORM</li></ul>
+                <a class="inline" href={chemical.links[0].href} {...external(chemical.links[0].external)}>{chemical.links[0].label} <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+            <details class="special-details"><summary>Ver alcance técnico <span aria-hidden="true">+</span></summary><ul>{chemical.decisions.map((item) => <li>{item}</li>)}</ul></details>
+          </article>
+          <div class="special-pair">
+            <article id="cercaya" class="cercaya" aria-labelledby="cercaya-title" data-project-copy data-reveal>
               <p class="eyebrow">Java / seguridad · {cercaya.status}</p><h3 id="cercaya-title">Cercaya</h3>
-              <p>Marketplace de servicios a domicilio. {cercaya.summary}</p>
-              <p><strong>Private Evidence Foundation.</strong> Autorización contextual, sanitización de imágenes, SHA-256 y auditoría sobre fixtures sintéticos.</p>
+              <p>{cercaya.summary}</p>
+              <p>{cercaya.responsibility}</p>
+              <div class="private-evidence"><h4>Evidencia privada</h4><p>Autorización contextual, sanitización de imágenes, integridad SHA-256 y auditoría. Implementación limitada a datos sintéticos.</p></div>
               <ul class="pills"><li>Java / Spring Boot</li><li>Spring Modulith</li><li>PostgreSQL</li><li>OIDC</li></ul>
               <a class="inline" href={cercaya.links[0].href} {...external(cercaya.links[0].external)}>{cercaya.links[0].label} <span aria-hidden="true">↗</span></a>
               <details class="special-details"><summary>Ver alcance técnico <span aria-hidden="true">+</span></summary><ul>{cercaya.decisions.map((item) => <li>{item}</li>)}</ul></details>
             </article>
-            <article class="chemical" aria-labelledby="chemical-title" data-reveal>
-              <div class="chemical-media" data-project-media><ProjectMedia src={chemical.media?.src} alt={chemical.media?.alt ?? ""} aspect="landscape" fit="contain" position="center top" /></div>
-              <div class="chemical-copy" data-project-copy>
-                <p class="eyebrow">SaaS + inventario · {chemical.status}</p><h3 id="chemical-title">Chemical Software</h3>
-                <p>{chemical.summary}</p><p>Multitenancy por comercio, permisos por sucursal e inventario transaccional.</p>
-                <ul class="pills"><li>NestJS</li><li>PostgreSQL / TypeORM</li><li>React</li></ul>
-                <a class="inline" href={chemical.links[0].href} {...external(chemical.links[0].external)}>{chemical.links[0].label} <span aria-hidden="true">↗</span></a>
-                <details class="special-details"><summary>Ver alcance técnico <span aria-hidden="true">+</span></summary><ul>{chemical.decisions.map((item) => <li>{item}</li>)}</ul></details>
+            <article id="memoriesai" class="memories" aria-labelledby="memories-title" data-reveal>
+              <div class="memories-intro" data-project-copy>
+                <p class="eyebrow">Herramienta interna · Python</p><h3 id="memories-title">MemoriesAI</h3>
+                <p>{memories.summary}</p>
               </div>
+              <dl class="memories-capabilities">
+                <div><dt>Recuperación BM25</dt><dd>Búsqueda por secciones y alcance de proyecto.</dd></div>
+                <div><dt>Ciclo de vida</dt><dd>Revisión, reemplazo y archivo de conocimiento.</dd></div>
+                <div><dt>Contexto verificable</dt><dd>Fragmentos acotados con origen identificable.</dd></div>
+                <div><dt>Persistencia local</dt><dd>Markdown como fuente e índices SQLite reconstruibles.</dd></div>
+              </dl>
+              <ul class="pills"><li>Python</li><li>BM25</li><li>SQLite</li><li>CLI</li></ul>
+              <details class="special-details memories-details"><summary>Ver decisiones de implementación <span aria-hidden="true">+</span></summary><ul>{memories.decisions.map((item) => <li>{item}</li>)}</ul></details>
             </article>
           </div>
         </section>
-
-        <article class="memories" aria-labelledby="memories-title">
-          <div class="memories-intro" data-project-copy data-reveal>
-            <p class="eyebrow">Herramienta interna · Python</p><h3 id="memories-title">MemoriesAI</h3>
-            <p>Desarrollé una herramienta local en Python para conservar y recuperar decisiones, aprendizajes y procedimientos entre sesiones de trabajo con agentes de software.</p>
-            <ul class="pills"><li>Python</li><li>BM25</li><li>SQLite</li><li>CLI</li></ul>
-          </div>
-          <dl class="memories-capabilities" data-reveal data-reveal-delay="70">
-            <div><dt>Recuperación BM25</dt><dd>Búsqueda por secciones y alcance de proyecto.</dd></div>
-            <div><dt>Ciclo de vida</dt><dd>Revisión, reemplazo y archivo de conocimiento.</dd></div>
-            <div><dt>Contexto verificable</dt><dd>Fragmentos acotados con origen identificable.</dd></div>
-            <div><dt>Persistencia local</dt><dd>Markdown como fuente e índices SQLite reconstruibles.</dd></div>
-          </dl>
-          <details class="special-details memories-details"><summary>Ver decisiones de implementación <span aria-hidden="true">+</span></summary><ul>{memories.decisions.map((item) => <li>{item}</li>)}</ul></details>
-        </article>
       </section>
 
       <section class="others" aria-labelledby="others-title">

@@ -134,11 +134,11 @@ export const projects: Project[] = [
     status: "En desarrollo",
     prominence: "featured",
     summary:
-      "Diseñé y evolucioné la arquitectura backend modular de un marketplace transaccional con más de 30 módulos de negocio, trabajando principalmente con Node.js, Express, PostgreSQL, Sequelize y Umzug.",
+      "Marketplace de materiales de construcción con catálogo, inventario, carrito multiseller, checkout, pagos y gestión de órdenes.",
     problem:
       "Sostener catálogo, comercios, inventario, reservas, checkout y finanzas con límites de dominio claros y consistencia transaccional.",
     responsibility:
-      "Trabajé sobre arquitectura, identidad y seguridad, marketplace, pagos, jobs, contratos OpenAPI, testing y rendimiento.",
+      "Diseñé y evolucioné su backend modular en Node.js, Express y PostgreSQL, con más de 30 módulos de negocio, contratos OpenAPI y pruebas. Implementé controles de consistencia, procesamiento asíncrono e integraciones de pago.",
     decisions: [
       "Organicé el monolito modular con composition root, DI manual, casos de uso, repositorios y adapters/gateways.",
       "Implementé sesiones, cookies seguras, OAuth, OTP, RBAC, auditoría y rate limiting con autorización en el servidor.",
@@ -171,11 +171,11 @@ export const projects: Project[] = [
     status: "En producción",
     prominence: "featured",
     summary:
-      "Plataforma editorial compuesta por backend Node/Express, CMS React, portales Next.js, librería UI compartida y notifier WebSub. Trabajo de forma transversal sobre producto, backend, frontend e integración.",
+      "CMS editorial multitenant con dos portales públicos en producción.",
     problem:
       "Unificar la operación editorial multitenant sin duplicar producto, manteniendo permisos, flujos y salida pública por portal.",
     responsibility:
-      "Trabajé sobre backend, CMS, portales, UI compartida e integraciones: datos, RBAC, media, publicación, SEO técnico, analítica y operación.",
+      "Desarrollé y evolucioné componentes del backend Node.js/Express, el CMS React y los portales Next.js. Implementé permisos, publicación editorial, gestión de media, métricas e integraciones; también trabajé sobre ISR, SEO y WebSub.",
     decisions: [
       "Separé CMS, API, portal público, UI compartida y notifier WebSub en responsabilidades explícitas.",
       "Protegí multitenancy y RBAC en el servidor; la interfaz refleja permisos ya autorizados.",
@@ -245,11 +245,11 @@ export const projects: Project[] = [
     status: "En desarrollo",
     prominence: "compact",
     summary:
-      "Marketplace que conecta solicitantes y prestadores de servicios. Construí parte de la foundation backend y del primer flujo seguro del solicitante utilizando Java, Spring Boot y PostgreSQL.",
+      "Marketplace que conecta solicitantes y prestadores de servicios a domicilio.",
     problem:
       "Ofrecer una foundation modular y segura para el onboarding, solicitudes y evidencia privada, sin exponer información geográfica sensible.",
     responsibility:
-      "Implementé backend modular, OpenAPI, seguridad default-deny, Auth0/OIDC, validación JWT, actor local, roles, consentimientos y el primer flujo de solicitudes.",
+      "Construí la base backend y el flujo inicial del solicitante con Java, Spring Boot y PostgreSQL: identidad, solicitudes idempotentes, privacidad de ubicación e integración transaccional.",
     decisions: [
       "Usé Spring Modulith, Spring JDBC y Flyway para módulos y límites explícitos, Problem Details y correlation IDs.",
       "Protegí ownership y privacidad geográfica con autorización contextual, requests idempotentes, locks transaccionales e integración entre módulos.",
@@ -273,11 +273,11 @@ export const projects: Project[] = [
     status: "SaaS en desarrollo",
     prominence: "compact",
     summary:
-      "Diseñé e implementé capacidades centrales de un SaaS multi-tenant con NestJS, PostgreSQL y TypeORM.",
+      "SaaS de gestión multicomercio con inventario, compras y operaciones por sucursal.",
     problem:
       "Unificar la operación diaria del negocio sin perder contexto de empresa, sucursal, rol ni trazabilidad de inventario.",
     responsibility:
-      "Implementé multitenancy por comercio, memberships, ADMIN / STAFF, permisos por sucursal, inventario, compras, stock ledger, reservas, idempotencia, locking, auditoría y contratos OpenAPI.",
+      "Diseñé e implementé capacidades centrales con NestJS, PostgreSQL y TypeORM: multitenancy, sesiones y permisos por sucursal, inventario transaccional, costos y auditoría.",
     decisions: [
       "Aislé el contexto de comercio principalmente en la aplicación con AsyncLocalStorage request scope, guards y validaciones de membresía; no uso PostgreSQL RLS.",
       "Protegí JWT/cookies, roles y permisos por sucursal en el servidor y mantuve auditoría en operaciones sensibles.",
@@ -305,7 +305,7 @@ export const projects: Project[] = [
     status: "Proyecto propio",
     prominence: "compact",
     summary:
-      "Herramienta local en Python para capturar, gobernar y recuperar decisiones, aprendizajes, incidencias, procedimientos y handoffs entre sesiones de trabajo con agentes de software.",
+      "Desarrollé una herramienta local en Python para conservar y recuperar decisiones, aprendizajes y procedimientos entre sesiones de trabajo con agentes de software.",
     problem:
       "Preservar contexto útil entre sesiones sin desplazar la autoridad del código, contratos y documentación actual del proyecto.",
     responsibility:

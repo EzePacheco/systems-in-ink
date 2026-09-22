@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-type Aspect = "landscape" | "wide" | "portrait" | "mobile" | "collage" | "tooling";
+type Aspect = "landscape" | "wide" | "portrait" | "mobile" | "collage" | "tooling" | "native";
 type Fit = "cover" | "contain";
 
 interface Props {
@@ -31,7 +31,7 @@ const {
 {src && (
   <figure
     class:list={["project-media", `project-media--${aspect}`, `project-media--${fit}`, className]}
-    style={`--media-position: ${position}`}
+    style={`--media-position: ${position}; --media-native-ratio: ${src.width} / ${src.height}`}
   >
     <div class="project-media__frame" data-project-media>
         <Image
