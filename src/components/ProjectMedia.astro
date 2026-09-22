@@ -34,22 +34,24 @@ const {
   class:list={["project-media", `project-media--${aspect}`, `project-media--${fit}`, className]}
   style={`--media-position: ${position}`}
 >
-  {
-    src ? (
-      <Image
-        src={src}
-        alt={alt}
-        widths={[640, 960, 1440]}
-        sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1000px) 92vw, 58vw"
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-      />
-    ) : (
-      <div class="project-media__placeholder" aria-label={placeholder}>
-        <span>{placeholder}</span>
-        <small>Nueva captura pendiente</small>
-      </div>
-    )
-  }
+  <div class="project-media__frame" data-project-media>
+    {
+      src ? (
+        <Image
+          src={src}
+          alt={alt}
+          widths={[640, 960, 1440]}
+          sizes="(max-width: 640px) calc(100vw - 40px), (max-width: 1000px) 92vw, 58vw"
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+        />
+      ) : (
+        <div class="project-media__placeholder" aria-label={placeholder}>
+          <span>{placeholder}</span>
+          <small>Nueva captura pendiente</small>
+        </div>
+      )
+    }
+  </div>
   {caption && <figcaption>{caption}</figcaption>}
 </figure>

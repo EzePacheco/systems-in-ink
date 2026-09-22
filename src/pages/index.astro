@@ -76,27 +76,31 @@ const personSchema = {
       </section>
 
       <article class="project elementos" aria-labelledby="elementos-title">
-        <div class="project-copy" data-reveal>
-          <p class="eyebrow">Marketplace B2B/B2C</p><p class="status">{elementos.status}</p><h2 id="elementos-title">Elementos</h2>
-          <p>{elementos.summary}</p><p><strong>Mi trabajo:</strong> {elementos.responsibility}</p>
-          <ul class="pills"><li>Backend modular</li><li>Pagos y conciliación</li><li>Jobs e idempotencia</li></ul>
-          <div class="links">{elementos.links.map((link) => <a href={link.href} {...external(link.external)}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
+        <div class="elementos-layout">
+          <div class="project-copy" data-project-copy data-reveal>
+            <p class="eyebrow">Marketplace B2B/B2C</p><p class="status">{elementos.status}</p><h2 id="elementos-title">Elementos</h2>
+            <p>{elementos.summary}</p><p><strong>Mi trabajo:</strong> {elementos.responsibility}</p>
+            <ul class="pills"><li>Backend modular</li><li>Pagos y conciliación</li><li>Jobs e idempotencia</li></ul>
+            <div class="links">{elementos.links.map((link) => <a href={link.href} {...external(link.external)}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
+          </div>
+          <div class="media-area media-area--elementos" data-reveal="media" data-reveal-delay="70"><ProjectMedia src={elementos.media.src} alt={elementos.media.alt} caption={elementos.media.caption} aspect="landscape" fit="contain" position="center top" /><p class="module-count"><strong>30<sup>+</sup></strong><span>módulos de negocio</span></p></div>
         </div>
-        <div class="media-area media-area--elementos" data-reveal="media" data-reveal-delay="70"><ProjectMedia src={elementos.media.src} alt={elementos.media.alt} caption={elementos.media.caption} aspect="landscape" fit="contain" position="center top" /><strong class="module-count">30<sup>+</sup><small>módulos<br />de negocio</small></strong></div>
         <div class="project-band" data-reveal="bar" data-reveal-delay="120">Node.js · Express · PostgreSQL · Sequelize · Umzug <span>Catálogo · Carrito/Stock · Checkout · Pagos · Órdenes</span></div>
         <details><summary>Ver decisiones de ingeniería <span>+</span></summary><ul>{elementos.decisions.map((item) => <li>{item}</li>)}</ul></details>
       </article>
 
       <article class="project editor" aria-labelledby="editor-title">
-        <div class="editor-copy" data-reveal><p class="eyebrow">CMS editorial multitenant + portales públicos</p><p class="status">{editor.status}</p><h2 id="editor-title">El Editor</h2><p>{editor.summary}</p><p><strong>Mi trabajo:</strong> {editor.responsibility}</p><a class="inline" href={editor.links[0].href} {...external(editor.links[0].external)}>{editor.links[0].label} <span aria-hidden="true">↗</span></a></div>
-        <div class="editor-media" data-reveal="media" data-reveal-delay="80"><ProjectMedia src={editor.media.src} alt={editor.media.alt} caption={editor.media.caption} aspect="landscape" fit="contain" position="center top" /><div class="future-slot" aria-hidden="true" data-reveal data-reveal-delay="160"><b>CMS</b><span>Captura de workflow pendiente</span></div></div>
+        <div class="editor-copy" data-project-copy data-reveal><p class="eyebrow">CMS editorial multitenant + portales públicos</p><p class="status">{editor.status}</p><h2 id="editor-title">El Editor</h2><p>{editor.summary}</p><p><strong>Mi trabajo:</strong> {editor.responsibility}</p><a class="inline" href={editor.links[0].href} {...external(editor.links[0].external)}>{editor.links[0].label} <span aria-hidden="true">↗</span></a></div>
+        <div class="editor-media" data-reveal="media" data-reveal-delay="80"><ProjectMedia src={editor.media.src} alt={editor.media.alt} caption={editor.media.caption} aspect="landscape" fit="contain" position="center top" /><div class="future-slot" aria-label="CMS: nueva captura pendiente" data-reveal data-reveal-delay="160"><b>CMS</b><span>Nueva captura pendiente</span></div></div>
         <ul class="pills"><li>Multitenancy</li><li>RBAC</li><li>React CMS</li><li>Next.js / ISR</li><li>S3 / CloudFront</li><li>SEO / analytics</li></ul>
         <details><summary>Ver decisiones de ingeniería <span>+</span></summary><ul>{editor.decisions.map((item) => <li>{item}</li>)}</ul></details>
       </article>
 
       <article class="project minecall" aria-labelledby="minecall-title">
-        <div class="mine-media" data-reveal="media"><ProjectMedia src={minecall.media.src} alt={minecall.media.alt} caption={minecall.media.caption} aspect="wide" fit="cover" position="center" /><p>GO · WEBSOCKETS · REDIS · LIVEKIT · POSTGRESQL</p></div>
-        <div class="mine-copy" data-reveal data-reveal-delay="70"><p class="eyebrow">Oficina virtual en tiempo real</p><p class="status">{minecall.status}</p><h2 id="minecall-title">MineCall</h2><p>{minecall.summary}</p><p>{minecall.problem}</p><a class="inline" href={minecall.links[0].href} {...external(minecall.links[0].external)}>Abrir MineCall <span aria-hidden="true">↗</span></a></div>
+        <div class="mine-layout">
+          <div class="mine-media" data-reveal="media"><ProjectMedia src={minecall.media.src} alt={minecall.media.alt} caption={minecall.media.caption} aspect="wide" fit="cover" position="center" /><p class="mine-media-meta">GO · WEBSOCKETS · REDIS · LIVEKIT · POSTGRESQL</p></div>
+          <div class="mine-copy" data-project-copy data-reveal data-reveal-delay="70"><p class="eyebrow">Oficina virtual en tiempo real</p><p class="status">{minecall.status}</p><h2 id="minecall-title">MineCall</h2><p>{minecall.summary}</p><p>{minecall.problem}</p><a class="inline" href={minecall.links[0].href} {...external(minecall.links[0].external)}>Abrir MineCall <span aria-hidden="true">↗</span></a></div>
+        </div>
         <div class="mine-notes" data-reveal data-reveal-delay="110"><p><b>Arquitectura modular en Go</b><span>pgx/sqlc, Goose, goroutines y channels.</span></p><p><b>Realtime distribuido</b><span>Presence, reconnect/replay, backpressure y Redis Pub/Sub.</span></p><p><b>Operación</b><span>Outbox, adapters de billing, Prometheus y pruebas de carga.</span></p></div>
         <details><summary>Ver decisiones de ingeniería <span>+</span></summary><ul>{minecall.decisions.map((item) => <li>{item}</li>)}</ul></details>
       </article>
@@ -104,12 +108,12 @@ const personSchema = {
       <section class="specialized" aria-labelledby="specialized-title">
         <header data-reveal><p class="eyebrow">Profundidad especializada</p><h2 id="specialized-title">Seguridad, operación<br />y tooling aplicado.</h2></header>
         <div class="special-grid">
-          <article class="cercaya" data-reveal><div><p class="eyebrow">Java / seguridad</p><p class="status">{cercaya.status}</p><h3>Cercaya</h3><p>Marketplace de servicios a domicilio.</p><p>{cercaya.summary}</p><b>Private Evidence Foundation</b><small>Autorización contextual · EXIF stripping · SHA-256 · auditoría</small><a class="inline" href={cercaya.links[0].href}>Pedir caso técnico <span aria-hidden="true">↗</span></a></div><ProjectMedia aspect="mobile" placeholder="Cercaya · flujo de solicitud" /><ul class="pills"><li>Java</li><li>Spring Boot</li><li>Spring Modulith</li><li>PostgreSQL</li><li>OIDC</li></ul></article>
-          <article class="chemical" data-reveal data-reveal-delay="70"><ProjectMedia src={chemical.media.src} alt={chemical.media.alt} caption={chemical.media.caption} aspect="landscape" fit="contain" position="center top" /><div><p class="eyebrow">SaaS + inventario</p><p class="status">{chemical.status}</p><h3>Chemical Software</h3><p>{chemical.summary}</p><p class="tenant">Plataforma · comercio · sucursales<br /><b>ADMIN / STAFF</b></p><a class="inline" href={chemical.links[0].href}>Pedir caso técnico <span aria-hidden="true">↗</span></a></div><ul class="pills"><li>NestJS</li><li>TypeScript</li><li>PostgreSQL</li><li>Inventory</li><li>Audit</li></ul></article>
+          <article class="cercaya" data-reveal><div class="cercaya-copy" data-project-copy><p class="eyebrow">Java / seguridad</p><p class="status">{cercaya.status}</p><h3 id="cercaya-title">Cercaya</h3><p>Marketplace de servicios a domicilio.</p><p>{cercaya.summary}</p><b>Private Evidence Foundation</b><small>Autorización contextual · EXIF stripping · SHA-256 · auditoría</small><a class="inline" href={cercaya.links[0].href}>Pedir caso técnico <span aria-hidden="true">↗</span></a></div><div class="cercaya-media"><ProjectMedia aspect="mobile" placeholder="Cercaya · flujo de solicitud" /></div><ul class="pills"><li>Java</li><li>Spring Boot</li><li>Spring Modulith</li><li>PostgreSQL</li><li>OIDC</li></ul></article>
+          <article class="chemical" data-reveal data-reveal-delay="70"><div class="chemical-layout"><div class="chemical-copy" data-project-copy><p class="eyebrow">SaaS + inventario</p><p class="status">{chemical.status}</p><h3 id="chemical-title">Chemical Software</h3><p>{chemical.summary}</p><p class="tenant">Plataforma · comercio · sucursales<br /><b>ADMIN / STAFF</b></p><a class="inline" href={chemical.links[0].href}>Pedir caso técnico <span aria-hidden="true">↗</span></a></div><div class="chemical-media"><ProjectMedia src={chemical.media.src} alt={chemical.media.alt} caption={chemical.media.caption} aspect="landscape" fit="contain" position="center top" /></div></div><ul class="pills"><li>NestJS</li><li>TypeScript</li><li>PostgreSQL</li><li>Inventory</li><li>Audit</li></ul></article>
         </div>
       </section>
 
-      <article class="memories" aria-labelledby="memories-title"><div data-reveal><p class="eyebrow">Herramienta local de investigación aplicada</p><p class="status">{memories.status}</p><h2 id="memories-title">MemoriesAI</h2><p>Memoria durable y verificable para agentes.</p><p>{memories.summary}</p><p class="experimental">El flujo normal es local, determinista y agnóstico al proveedor/modelo. Vector e hybrid retrieval son extensiones experimentales.</p><a class="inline" href={memories.links[0].href}>Pedir caso técnico <span aria-hidden="true">↗</span></a></div><div data-reveal="media" data-reveal-delay="80"><ProjectMedia aspect="tooling" placeholder="MemoriesAI · retrieval con provenance" /></div><ul class="pills"><li>Python</li><li>BM25</li><li>SQLite / FTS5</li><li>CLI</li></ul></article>
+      <article class="memories" aria-labelledby="memories-title"><div data-project-copy data-reveal><p class="eyebrow">Herramienta local de investigación aplicada</p><p class="status">{memories.status}</p><h2 id="memories-title">MemoriesAI</h2><p>Memoria durable y verificable para agentes.</p><p>{memories.summary}</p><p class="experimental">El flujo normal es local, determinista y agnóstico al proveedor/modelo. Vector e hybrid retrieval son extensiones experimentales.</p><a class="inline" href={memories.links[0].href}>Pedir caso técnico <span aria-hidden="true">↗</span></a></div><div class="memories-media" data-reveal="media" data-reveal-delay="80"><ProjectMedia aspect="tooling" placeholder="MemoriesAI · retrieval con provenance" /></div><ul class="pills"><li>Python</li><li>BM25</li><li>SQLite / FTS5</li><li>CLI</li></ul></article>
 
       <section class="others" aria-labelledby="others-title"><header data-reveal><p class="eyebrow">Otros productos</p><h2 id="others-title">También construí.</h2></header><div data-reveal data-reveal-delay="70">{others.map((project) => <article><p class="eyebrow">{project.status}</p><h3>{project.title}</h3><p>{project.summary}</p><ul class="pills">{project.stack.slice(0, 5).map((item) => <li>{item}</li>)}</ul>{project.links[0] && <a class="inline" href={project.links[0].href} {...external(project.links[0].external)}>{project.links[0].label} <span aria-hidden="true">↗</span></a>}</article>)}<article><p class="eyebrow">MVP B2B SaaS</p><h3>DATAMARK</h3><p>MVP B2B SaaS de ventas, inventario, clientes y analítica desarrollado en equipo. Lideré el backend con Node.js, TypeScript, Express, PostgreSQL y Prisma, implementando JWT/RBAC y dashboards.</p><ul class="pills"><li>Node.js</li><li>TypeScript</li><li>Express</li><li>PostgreSQL</li><li>Prisma</li></ul></article></div></section>
 
@@ -173,4 +177,369 @@ const personSchema = {
   .stack{display:grid;grid-template-columns:.78fr .58fr 1fr;gap:clamp(28px,5vw,76px);padding-block:clamp(78px,9vw,120px);align-items:start}.stack h2{margin-top:15px;font-size:var(--text-h2);font-weight:780;letter-spacing:-.075em;line-height:.98}.stack>div>p:last-child{max-width:42ch;margin-top:24px;color:var(--muted);font-size:var(--text-lead)}.stack aside{padding:30px;border-radius:14px;background:var(--gold);box-shadow:0 18px 32px rgba(161,118,12,.12);transition:transform var(--motion-base) var(--ease),box-shadow var(--motion-base) var(--ease)}.stack aside p{font-size:.8rem;font-weight:750;text-transform:uppercase}.stack aside b{display:block;margin-top:20px;font-size:clamp(1.55rem,2.1vw,2.2rem);font-weight:780;letter-spacing:-.06em;line-height:1.18}.capabilities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 34px}.capabilities h3{font-size:1.2rem;font-weight:750}.capabilities p{margin-top:5px;color:var(--muted);font-size:.91rem}.capabilities ul{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:13px;font-size:.91rem;font-weight:600}.capabilities li:not(:last-child)::after{margin-left:16px;color:var(--gold-deep);content:"·"}.method{display:grid;grid-template-columns:1fr .92fr;gap:clamp(40px,10vw,145px);padding:clamp(48px,6vw,76px);border-radius:var(--r);background:#dbd3c7;transition:background-color var(--motion-base) var(--ease)}.method h2{margin-top:14px;font-size:clamp(2.3rem,4.1vw,4.25rem);font-weight:760;letter-spacing:-.07em;line-height:1.02}.method>div:last-child{display:grid;gap:18px;align-self:center;max-width:58ch;color:#505149;font-size:clamp(1rem,1vw,1.1rem)}.method b{color:#262620}.contact{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr);gap:24px clamp(42px,8vw,120px);padding-block:clamp(94px,11vw,138px) clamp(82px,8vw,112px)}.contact h2{font-size:clamp(3.7rem,7vw,7.35rem);font-weight:780;letter-spacing:-.09em;line-height:.89}.contact>p:nth-of-type(2){align-self:end;color:var(--muted);font-size:1.08rem}.contact>.eyebrow{grid-column:1/-1}.contact>a{color:var(--gold-deep);font-size:clamp(1.08rem,1.8vw,1.48rem);font-weight:750;overflow-wrap:anywhere}.contact nav{display:flex;flex-wrap:wrap;gap:20px;grid-column:1/-1;margin-top:16px;font-size:.9rem;font-weight:700}.footer{display:flex;justify-content:space-between;gap:20px;padding-block:24px;color:#74766e;font-size:.78rem}
   .motion-ready [data-hero-reveal],.motion-ready [data-reveal]{opacity:0;transform:translate3d(0,18px,0);transition:opacity var(--motion-reveal) var(--ease) var(--reveal-delay,0ms),transform var(--motion-reveal) var(--ease) var(--reveal-delay,0ms)}.motion-ready [data-reveal="media"]{transform:translate3d(0,16px,0) scale(.985)}.motion-ready [data-reveal="bar"]{transform:scaleX(.96);transform-origin:left}.motion-ready .hero.is-visible [data-hero-reveal],.motion-ready [data-reveal].is-visible{opacity:1;transform:translate3d(0,0,0)}.motion-ready [data-reveal="media"].is-visible{transform:translate3d(0,0,0) scale(1)}.motion-ready [data-reveal="bar"].is-visible{transform:scaleX(1)}
   @container (max-width:700px){.elementos,.editor,.minecall,.memories{grid-template-columns:minmax(0,1fr)}.elementos .media-area{order:-1;min-height:370px}.editor-copy{max-width:none}.mine-media{min-height:380px}.mine-notes{grid-template-columns:minmax(0,1fr)}.memories>div:nth-child(2){order:-1}.chemical>div{max-width:100%!important}}@media (hover:hover) and (pointer:fine){.button:hover{transform:translateY(-3px)}.project-media img{transition:transform 450ms var(--ease)}.elementos{transition:transform var(--motion-base) var(--ease),box-shadow var(--motion-base) var(--ease)}.elementos:hover{transform:translateY(-2px);box-shadow:0 22px 38px rgba(37,38,32,.16)}.elementos:hover .project-media img{transform:scale(1.018)}.editor:hover .project-media img,.minecall:hover .project-media img,.chemical:hover .project-media img{transform:scale(1.02)}.inline:hover span,.links a:hover span,.header-cv:hover span,.contact a:hover span{transform:translateX(4px)}.experience article:not(.current):hover{transform:translateX(3px);background:#3a3b35}.stack aside:hover{transform:translateY(-2px) rotate(-.5deg);box-shadow:0 22px 34px rgba(161,118,12,.16)}.method:hover{background:#dfd8cc}}@media(max-width:900px){.hero{grid-template-columns:1fr .72fr;gap:30px}.intro{grid-template-columns:.36fr 1fr}.special-grid{grid-template-columns:1fr}.special-grid article{min-height:480px}.others>div{grid-template-columns:1fr 1fr}.others article:last-child{grid-column:1/-1}.stack{grid-template-columns:1fr 1fr}.capabilities{grid-column:1/-1;grid-template-columns:1fr 1fr}.method{grid-template-columns:1fr}}@media(max-width:640px){.site-header{grid-template-columns:1fr auto;min-height:68px}.site-header.is-scrolled{min-height:60px}.site-header nav{display:none}.header-cv{padding:8px 0;background:transparent;color:var(--gold-deep)}.hero{display:flex;min-height:auto;flex-direction:column;gap:32px;padding-block:54px 38px}.hero h1{font-size:clamp(3.25rem,14vw,4.45rem)}.lead{margin-top:24px}.hero-portrait{width:100%;min-height:430px;border-radius:14px}.core{gap:7px 13px;padding-top:0;font-size:.83rem}.core li:not(:last-child)::after{margin-left:13px}.intro{grid-template-columns:minmax(0,1fr);gap:19px;padding-block:76px 22px}.intro h2,.specialized h2,.others h2,.experience h2{font-size:clamp(2.5rem,11vw,3.45rem)}.project{width:100%;margin-top:54px;border-radius:0}.elementos,.editor,.minecall,.memories{grid-template-columns:minmax(0,1fr)}.elementos .project-copy,.editor,.mine-copy,.special-grid article,.memories,.experience,.method{padding-inline:var(--g)}.media-area{min-height:300px;padding:14px}.module-count{right:30px;bottom:28px;font-size:clamp(3.5rem,16vw,5.2rem)}.project-band{display:grid;padding:18px var(--g);font-size:.74rem}.elementos details,.minecall details{margin-inline:var(--g)}.editor{gap:26px}.editor-media{padding-bottom:38px}.future-slot{right:0}.mine-media{min-height:310px;padding:14px}.mine-media p{right:28px;bottom:25px;left:28px;font-size:.76rem}.mine-notes{padding:0 var(--g) 30px}.mine-notes p{padding:12px 0}.specialized{padding-top:72px}.special-grid{gap:16px;margin-top:33px}.special-grid article{min-height:470px;border-radius:0}.cercaya .project-media{right:var(--g);bottom:92px;width:122px}.chemical>.project-media{top:24px;right:var(--g);width:68%}.memories{gap:24px;margin-top:48px;border-radius:0}.memories h2{font-size:clamp(3rem,13.5vw,4.2rem)}.others{padding-block:64px}.others>div{grid-template-columns:minmax(0,1fr);margin-top:32px}.others article:last-child{grid-column:auto}.experience{width:100%;border-radius:0}.experience>div{margin-top:33px}.experience article{grid-template-columns:minmax(0,1fr);gap:8px;padding:23px}.experience .current{padding:29px 23px}.stack{grid-template-columns:minmax(0,1fr);padding-block:70px}.capabilities{grid-column:auto;grid-template-columns:minmax(0,1fr);margin-top:10px}.method{width:100%;border-radius:0}.contact{grid-template-columns:minmax(0,1fr);padding-block:78px}.contact h2{font-size:clamp(3.15rem,13.4vw,4.5rem)}.contact>.eyebrow{grid-column:auto}.contact nav{grid-column:auto;margin-top:13px}.footer{align-items:flex-start;flex-direction:column;padding-block:22px}.motion-ready [data-hero-reveal],.motion-ready [data-reveal]{transform:translate3d(0,10px,0)}.motion-ready [data-reveal="media"]{transform:translate3d(0,10px,0) scale(.99)}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+
+<style is:global>
+  /* Media is structural: screenshots and their surrounding copy never share a layer. */
+  .project > *,
+  [data-project-copy],
+  [data-project-media],
+  .chemical-layout,
+  .chemical-copy,
+  .chemical-media,
+  .cercaya-copy,
+  .cercaya-media,
+  .memories-media {
+    min-width: 0;
+  }
+
+  .project-media {
+    width: 100%;
+    margin: 0;
+    overflow: visible;
+    background: transparent;
+    aspect-ratio: auto;
+  }
+
+  .project-media__frame {
+    position: relative;
+    width: 100%;
+    overflow: clip;
+    border-radius: inherit;
+    background: rgba(30, 31, 27, 0.08);
+    aspect-ratio: var(--media-ratio, 16 / 10);
+  }
+
+  .project-media img,
+  .project-media__placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .project-media figcaption {
+    position: static;
+    min-height: 0;
+    margin-top: 10px;
+    padding: 0;
+    color: inherit;
+    font-size: 0.72rem;
+    font-weight: 650;
+    line-height: 1.45;
+    text-shadow: none;
+  }
+
+  .project-media__placeholder {
+    display: grid;
+    place-content: center;
+  }
+
+  .elementos {
+    container-name: elementos;
+    display: block;
+  }
+
+  .elementos h2 {
+    font-size: clamp(3rem, 6cqi, 5.4rem);
+  }
+
+  .elementos-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  }
+
+  .media-area {
+    position: static;
+    min-height: 0;
+    display: grid;
+    align-content: start;
+    gap: 16px;
+  }
+
+  .media-area .project-media {
+    height: auto;
+  }
+
+  .media-area .project-media__frame {
+    background: #11120f;
+  }
+
+  .module-count {
+    position: static;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0;
+    color: #fff8e3;
+    text-shadow: none;
+  }
+
+  .module-count strong {
+    font-size: clamp(2.8rem, 5.5cqi, 5.4rem);
+    letter-spacing: -0.1em;
+    line-height: 0.8;
+  }
+
+  .module-count span {
+    max-width: 9ch;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .editor {
+    container-name: editor;
+  }
+
+  .editor-media {
+    position: static;
+    display: grid;
+    gap: 14px;
+    padding-bottom: 0;
+  }
+
+  .editor-media .project-media {
+    box-shadow: 0 22px 40px rgba(20, 58, 43, 0.14);
+  }
+
+  .future-slot {
+    position: static;
+    justify-self: end;
+    min-width: 0;
+    width: min(100%, 190px);
+    box-shadow: none;
+  }
+
+  .minecall {
+    container-name: minecall;
+    display: block;
+  }
+
+  .mine-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .mine-media {
+    position: static;
+    min-height: 0;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+  }
+
+  .mine-media .project-media {
+    height: auto;
+  }
+
+  .mine-media .project-media figcaption {
+    color: #d6eadf;
+  }
+
+  .mine-media .mine-media-meta {
+    position: static;
+    margin: 0;
+    color: #c9ddd4;
+    font-size: clamp(0.72rem, 1.05cqi, 0.92rem);
+    font-weight: 750;
+    letter-spacing: 0.045em;
+    line-height: 1.45;
+    text-shadow: none;
+  }
+
+  .special-grid article {
+    min-width: 0;
+  }
+
+  .cercaya {
+    container-name: cercaya;
+    grid-template-columns: minmax(0, 1fr) minmax(110px, 0.26fr);
+    grid-template-areas:
+      "copy media"
+      "pills pills";
+    grid-template-rows: auto auto;
+    min-height: 0;
+  }
+
+  .cercaya-copy {
+    grid-area: copy;
+  }
+
+  .cercaya-media {
+    grid-area: media;
+    align-self: end;
+    justify-self: end;
+    width: min(100%, 138px);
+  }
+
+  .cercaya .project-media {
+    position: static;
+    width: 100%;
+    max-width: none;
+  }
+
+  .cercaya .pills {
+    grid-area: pills;
+  }
+
+  .chemical {
+    container-name: chemical;
+    display: block;
+    min-height: 0;
+  }
+
+  .chemical-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: clamp(1.5rem, 4cqi, 3.25rem);
+    align-items: center;
+  }
+
+  .chemical-copy {
+    max-width: none;
+  }
+
+  .chemical-media {
+    min-width: 0;
+  }
+
+  .chemical .project-media {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+  }
+
+  .chemical .project-media__frame {
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .chemical .pills {
+    margin-top: 22px;
+  }
+
+  .memories {
+    container-name: memories;
+  }
+
+  .memories-media {
+    justify-self: end;
+    width: min(100%, 390px);
+  }
+
+  .memories .project-media {
+    background: transparent;
+  }
+
+  .memories .project-media__frame {
+    background: #171813;
+  }
+
+  @container elementos (max-width: 920px) {
+    .elementos-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .elementos .media-area {
+      order: initial;
+    }
+  }
+
+  @container editor (max-width: 760px) {
+    .editor {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .future-slot {
+      justify-self: start;
+    }
+  }
+
+  @container minecall (max-width: 800px) {
+    .mine-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .mine-notes {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @container cercaya (max-width: 440px) {
+    .cercaya {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        "copy"
+        "media"
+        "pills";
+    }
+
+    .cercaya-media {
+      justify-self: start;
+      width: 122px;
+    }
+  }
+
+  @container chemical (max-width: 660px) {
+    .chemical-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .chemical-media {
+      order: 2;
+    }
+  }
+
+  @container memories (max-width: 700px) {
+    .memories {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .memories-media {
+      order: initial;
+      justify-self: start;
+      width: min(100%, 330px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .elementos .media-area {
+      order: initial;
+    }
+
+    .media-area,
+    .mine-media {
+      padding: 14px;
+    }
+
+    .editor-media {
+      padding-bottom: 0;
+    }
+
+    .memories-media {
+      order: initial;
+    }
+
+    .contact h2 {
+      font-size: clamp(2.7rem, 13.4vw, 4.5rem);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .editor {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .memories {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .memories-media {
+      order: initial;
+      justify-self: start;
+      width: min(100%, 330px);
+    }
+  }
 </style>
