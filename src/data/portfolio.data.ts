@@ -80,7 +80,7 @@ export const links = {
   },
   linkedin: {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ezepacheco-dev",
+    href: "https://www.linkedin.com/in/ezepacheco-dev/",
     display: "/in/ezepacheco-dev",
     external: true,
   },
