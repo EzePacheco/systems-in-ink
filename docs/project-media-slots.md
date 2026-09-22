@@ -15,10 +15,12 @@ mantener el layout y la carga de cada caso sin alterar la composición.
 | Cercaya | `cercaya/evidence.webp` | mobile, 9:19.5 | Evidencia privada o autorización contextual, sin datos sensibles. |
 | Chemical Software | `chemical/inventory.webp` | landscape, 16:10 | Inventario, compras u operación principal. |
 | Chemical Software | `chemical/operations.webp` | landscape, 16:10 | Dashboard o segundo flujo operativo; opcional. |
-| MemoriesAI | `memoriesai/retrieval.webp` | tooling, 16:10 | CLI real o resultado con provenance y contexto recuperado. |
 
 Usar capturas reales en WebP o AVIF. Evitar marcos de dispositivo, filtros, datos sensibles y
 recortes que oculten la interfaz relevante.
+
+MemoriesAI no requiere captura: es una herramienta interna de scripts y su caso se presenta
+mediante capacidades técnicas, sin reservar un slot de media.
 
 ## Instrucciones de captura
 

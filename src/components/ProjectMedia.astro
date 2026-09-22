@@ -12,7 +12,6 @@ interface Props {
   fit?: Fit;
   position?: string;
   caption?: string;
-  placeholder?: string;
   class?: string;
   priority?: boolean;
 }
@@ -24,19 +23,17 @@ const {
   fit = "contain",
   position = "center",
   caption,
-  placeholder,
   class: className,
   priority = false,
 } = Astro.props;
 ---
 
-<figure
-  class:list={["project-media", `project-media--${aspect}`, `project-media--${fit}`, className]}
-  style={`--media-position: ${position}`}
->
-  <div class="project-media__frame" data-project-media>
-    {
-      src ? (
+{src && (
+  <figure
+    class:list={["project-media", `project-media--${aspect}`, `project-media--${fit}`, className]}
+    style={`--media-position: ${position}`}
+  >
+    <div class="project-media__frame" data-project-media>
         <Image
           src={src}
           alt={alt}
@@ -45,13 +42,7 @@ const {
           loading={priority ? "eager" : "lazy"}
           decoding="async"
         />
-      ) : (
-        <div class="project-media__placeholder" aria-label={placeholder}>
-          <span>{placeholder}</span>
-          <small>Nueva captura pendiente</small>
-        </div>
-      )
-    }
-  </div>
-  {caption && <figcaption>{caption}</figcaption>}
-</figure>
+    </div>
+    {caption && <figcaption>{caption}</figcaption>}
+  </figure>
+)}

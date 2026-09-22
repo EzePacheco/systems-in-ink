@@ -25,8 +25,8 @@ export type Project = {
   decisions: string[];
   evidence: string[];
   stack: string[];
-  media: {
-    src?: ImageMetadata;
+  media?: {
+    src: ImageMetadata;
     alt: string;
     caption?: string;
   };
@@ -258,9 +258,6 @@ export const projects: Project[] = [
     ],
     evidence: ["Java / Spring Boot modular", "Seguridad y privacidad por defecto", "Consistencia transaccional", "Integration tests con Testcontainers"],
     stack: ["Java", "Spring Boot", "Spring Modulith", "Spring JDBC", "PostgreSQL", "Flyway", "Auth0 / OIDC", "JUnit", "Testcontainers", "React Native / Expo", "Astro"],
-    media: {
-      alt: "Captura móvil futura del flujo de solicitud de Cercaya",
-    },
     links: [
       {
         label: "Pedir caso técnico",
@@ -292,7 +289,6 @@ export const projects: Project[] = [
     media: {
       src: chemicalSoftwareVisual,
       alt: "Prototipo visual aprobado de Chemical Software con catálogo e inventario y datos sintéticos",
-      caption: "Prototipo aprobado · datos sintéticos",
     },
     links: [
       {
@@ -321,9 +317,6 @@ export const projects: Project[] = [
     ],
     evidence: ["Lifecycle, provenance y ownership", "BM25 y FTS5 local", "Índices y recovery reconstruibles", "Adapter de Codex y portabilidad"],
     stack: ["Python", "BM25", "SQLite", "FTS5", "FastEmbed (experimental)", "CLI"],
-    media: {
-      alt: "Captura futura de retrieval de MemoriesAI con provenance",
-    },
     links: [
       {
         label: "Pedir caso técnico",
