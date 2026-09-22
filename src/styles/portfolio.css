@@ -353,7 +353,7 @@ h1, h2, h3 { text-wrap: balance; }
 .experience-list article > div > p { margin-top: 2px; color: #c5c4bb; font-size: .83rem; }
 .experience-list article > p:last-child { color: #d3d2ca; font-size: .82rem; line-height: 1.45; }
 .experience-list .current { padding-block: 18px; background: var(--gold); color: #27251d; }
-.experience-list .current time, .experience-list .current article > div > p, .experience-list .current > p:last-child { color: #564316; }
+.experience-list .current time, .experience-list .current > div > p, .experience-list .current > p:last-child { color: #564316; }
 .experience-list .current h3 { font-size: clamp(1.15rem, 1rem + .7vw, 1.7rem); letter-spacing: -.045em; }
 
 .contact {
