@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+type GalleryImage = {
+  src: ImageMetadata;
+  label: string;
+  alt: string;
+};
+
+interface Props {
+  images: GalleryImage[];
+  label: string;
+  priority?: boolean;
+}
+
+const { images, label, priority = false } = Astro.props;
+const galleryId = `gallery-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+---
+
+{images.length > 0 && (
+  <div class="project-gallery" data-project-gallery>
+    <div class="project-gallery__tabs" role="tablist" aria-label={`Vistas de ${label}`}>
+      {images.map((image, index) => (
+        <button
+          id={`${galleryId}-tab-${index}`}
+          type="button"
+          role="tab"
+          aria-controls={`${galleryId}-panel-${index}`}
+          aria-selected={index === 0 ? "true" : "false"}
+          tabindex={index === 0 ? 0 : -1}
+          hidden={index !== 0}
+          data-gallery-tab
+        >
+          {image.label}
+        </button>
+      ))}
+    </div>
+
+    {images.map((image, index) => (
+      <figure
+        id={`${galleryId}-panel-${index}`}
+        class="project-gallery__panel"
+        role="tabpanel"
+        aria-labelledby={`${galleryId}-tab-${index}`}
+        tabindex="0"
+        hidden={index !== 0}
+      >
+        <div class="project-gallery__frame" style={`--gallery-ratio: ${image.src.width} / ${image.src.height}`}>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            widths={[640, 960, 1280, 1600, 1920]}
+            sizes="(max-width: 680px) calc(100vw - 64px), (max-width: 960px) 88vw, 54vw"
+            format="webp"
+            loading={priority && index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          <span>{image.label}</span>
+          <a href={image.src.src} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${image.label} en tamaño completo`}>
+            Ampliar captura <span aria-hidden="true">↗</span>
+          </a>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+)}
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-project-gallery]").forEach((gallery) => {
+    const tabs = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-gallery-tab]"));
+    const panels = Array.from(gallery.querySelectorAll<HTMLElement>("[role='tabpanel']"));
+    if (tabs.length < 2) return;
+
+    const select = (index: number, moveFocus = false) => {
+      tabs.forEach((tab, tabIndex) => {
+        const selected = tabIndex === index;
+        tab.hidden = false;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[tabIndex].hidden = !selected;
+      });
+      if (moveFocus) tabs[index].focus();
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.hidden = false;
+      tab.addEventListener("click", () => select(index));
+      tab.addEventListener("keydown", (event) => {
+        let nextIndex: number | undefined;
+        if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+        if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") nextIndex = 0;
+        if (event.key === "End") nextIndex = tabs.length - 1;
+        if (nextIndex !== undefined) {
+          event.preventDefault();
+          select(nextIndex, true);
+        }
+      });
+    });
+  });
+</script>

@@ -1,9 +1,14 @@
 import type { ImageMetadata } from "astro";
 import chichitosVisual from "../assets/cases/chichitos-real.webp";
-import chemicalSoftwareVisual from "../assets/cases/chemical-software-reference.webp";
-import elEditorVisual from "../assets/cases/el-editor-real.webp";
-import elementosVisual from "../assets/cases/elementos-real.webp";
-import mineCallVisual from "../assets/cases/minecall-real.webp";
+import elementosOfertas from "../assets/cases/elementos/ofertas.png";
+import elementosInicio from "../assets/cases/elementos/inicio.png";
+import elementosCatalogo from "../assets/cases/elementos/catalogo.png";
+import editorPlatense from "../assets/cases/el-editor/portal-platense.png";
+import editorMendoza from "../assets/cases/el-editor/portal-mendoza.png";
+import editorMetricsMendoza from "../assets/cases/el-editor/metricas-mendoza.png";
+import editorMetricsPlatense from "../assets/cases/el-editor/metricas-platense.png";
+import minecallWorld from "../assets/cases/minecall/mundo.png";
+import minecallAccess from "../assets/cases/minecall/acceso.png";
 
 export type LinkItem = {
   label: string;
@@ -30,6 +35,11 @@ export type Project = {
     alt: string;
     caption?: string;
   };
+  gallery?: {
+    src: ImageMetadata;
+    label: string;
+    alt: string;
+  }[];
   links: LinkItem[];
 };
 
@@ -152,10 +162,23 @@ export const projects: Project[] = [
       "Observabilidad y rendimiento",
     ],
     stack: ["Node.js", "Express", "PostgreSQL", "Sequelize", "Umzug", "React", "Next.js", "Mercado Pago", "S3", "OpenAPI"],
-    media: {
-      src: elementosVisual,
-      alt: "Inicio del portal Elementos con categorías de materiales para la construcción",
-    },
+    gallery: [
+      {
+        src: elementosOfertas,
+        label: "Ofertas y productos",
+        alt: "Listado de ofertas de materiales de construcción con precios, comercios y acciones de compra.",
+      },
+      {
+        src: elementosCatalogo,
+        label: "Catálogo",
+        alt: "Catálogo de materiales de construcción con categorías y filtros de producto.",
+      },
+      {
+        src: elementosInicio,
+        label: "Inicio público",
+        alt: "Página inicial del portal Elementos con categorías de materiales para la construcción.",
+      },
+    ],
     links: [
       {
         label: "Abrir portal de prueba",
@@ -189,10 +212,28 @@ export const projects: Project[] = [
       "Jobs e integraciones operativas",
     ],
     stack: ["Node.js", "Express", "PostgreSQL", "Sequelize", "React", "Next.js", "AWS S3 / CloudFront", "WebSub"],
-    media: {
-      src: elEditorVisual,
-      alt: "Sección Deportes del portal público El Editor Platense",
-    },
+    gallery: [
+      {
+        src: editorPlatense,
+        label: "Portal Platense",
+        alt: "Portal público de El Editor Platense con noticias, secciones y contenidos editoriales.",
+      },
+      {
+        src: editorMendoza,
+        label: "Portal Mendoza",
+        alt: "Portal público de El Editor Mendoza con noticias, secciones y contenidos editoriales.",
+      },
+      {
+        src: editorMetricsMendoza,
+        label: "Métricas · Mendoza",
+        alt: "Panel real de métricas de El Editor Mendoza para el período mostrado en la interfaz.",
+      },
+      {
+        src: editorMetricsPlatense,
+        label: "Métricas · Platense",
+        alt: "Panel real de métricas de El Editor Platense para el período mostrado en la interfaz.",
+      },
+    ],
     links: [
       {
         label: "Abrir El Editor Platense",
@@ -226,10 +267,18 @@ export const projects: Project[] = [
     ],
     evidence: ["Backend modular en Go", "Realtime y presencia distribuida", "LiveKit y billing mediante adapters", "Prometheus, load/soak y E2E"],
     stack: ["Go", "PostgreSQL", "Redis", "WebSockets", "LiveKit", "React", "Playwright"],
-    media: {
-      src: mineCallVisual,
-      alt: "Mundo persistente de MineCall con avatares sintéticos dentro de un espacio construido",
-    },
+    gallery: [
+      {
+        src: minecallWorld,
+        label: "Mundo realtime",
+        alt: "Vista de MineCall: mundo compartido con salas, zonas y controles de presencia.",
+      },
+      {
+        src: minecallAccess,
+        label: "Acceso",
+        alt: "Pantalla de acceso de MineCall sobre el entorno visual del producto.",
+      },
+    ],
     links: [
       {
         label: "Abrir MineCall",
@@ -286,10 +335,6 @@ export const projects: Project[] = [
     ],
     evidence: ["Multitenancy aplicado", "Inventario y trazabilidad", "OpenAPI, migraciones y E2E", "CI y frontend conectado"],
     stack: ["NestJS", "TypeScript", "PostgreSQL", "TypeORM", "React", "TanStack Query", "OpenAPI", "GitHub Actions"],
-    media: {
-      src: chemicalSoftwareVisual,
-      alt: "Prototipo visual aprobado de Chemical Software con catálogo e inventario y datos sintéticos",
-    },
     links: [
       {
         label: "Pedir caso técnico",

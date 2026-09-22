@@ -1,6 +1,6 @@
 ---
 import "@fontsource-variable/manrope";
-import ProjectMedia from "../components/ProjectMedia.astro";
+import ProjectGallery from "../components/ProjectGallery.astro";
 import portrait from "../assets/profile/ezequiel-pacheco.png";
 import "../styles/portfolio.css";
 import { experience, links, metadata, profile, projects, type Project } from "../data/portfolio.data";
@@ -93,7 +93,7 @@ const personSchema = {
               <ul class="project-points"><li>Consistencia transaccional</li><li>Pagos e integraciones</li><li>Jobs y operación</li></ul>
               <div class="links">{elementos.links.map((link) => <a href={link.href} {...external(link.external)}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
             </div>
-            <div class="elementos-media" data-project-media data-reveal="media" data-reveal-delay="70"><ProjectMedia src={elementos.media?.src} alt={elementos.media?.alt ?? ""} aspect="native" fit="contain" position="center top" priority /></div>
+            <div class="elementos-media" data-reveal="media" data-reveal-delay="70"><ProjectGallery images={elementos.gallery ?? []} label="Elementos" priority /></div>
           </div>
           <details><summary>Ver decisiones de ingeniería <span aria-hidden="true">+</span></summary><ul>{elementos.decisions.map((item) => <li>{item}</li>)}</ul></details>
         </article>
@@ -108,14 +108,14 @@ const personSchema = {
               <div class="links">{editor.links.map((link) => <a href={link.href} {...external(link.external)}>{link.label} <span aria-hidden="true">↗</span></a>)}</div>
               <ul class="pills"><li>Multitenancy</li><li>RBAC</li><li>React CMS</li><li>Next.js / ISR</li><li>S3 / CloudFront</li><li>SEO / analytics</li></ul>
             </div>
-            <div class="editor-media" data-project-media data-reveal="media" data-reveal-delay="80"><ProjectMedia src={editor.media?.src} alt={editor.media?.alt ?? ""} aspect="native" fit="contain" position="center top" /></div>
+            <div class="editor-media" data-reveal="media" data-reveal-delay="80"><ProjectGallery images={editor.gallery ?? []} label="El Editor" /></div>
           </div>
           <details><summary>Ver decisiones de ingeniería <span aria-hidden="true">+</span></summary><ul>{editor.decisions.map((item) => <li>{item}</li>)}</ul></details>
         </article>
 
         <article class="project minecall" aria-labelledby="minecall-title">
           <div class="mine-layout">
-            <div class="mine-media" data-project-media data-reveal="media"><ProjectMedia src={minecall.media?.src} alt={minecall.media?.alt ?? ""} aspect="wide" fit="cover" position="center" /><p class="mine-media-meta">Go · PostgreSQL · WebSockets · Redis · LiveKit</p></div>
+            <div class="mine-media" data-reveal="media"><ProjectGallery images={minecall.gallery ?? []} label="MineCall" /><p class="mine-media-meta">Go · PostgreSQL · WebSockets · Redis · LiveKit</p></div>
             <div class="mine-copy" data-project-copy data-reveal data-reveal-delay="70">
               <p class="eyebrow">Oficina virtual en tiempo real · {minecall.status}</p>
               <h3 id="minecall-title">MineCall</h3>
@@ -129,19 +129,7 @@ const personSchema = {
 
         <section class="specialized" aria-labelledby="specialized-title">
           <header><p class="eyebrow">Casos especializados</p><h2 id="specialized-title">Seguridad, operación y producto.</h2></header>
-          <article id="chemical-software" class="chemical" aria-labelledby="chemical-title">
-            <div class="chemical-layout">
-              <div class="chemical-media" data-project-media data-reveal="media"><ProjectMedia src={chemical.media?.src} alt={chemical.media?.alt ?? ""} aspect="native" fit="contain" position="center top" /></div>
-              <div class="chemical-copy" data-project-copy data-reveal>
-                <p class="eyebrow">{chemical.status}</p><h3 id="chemical-title">Chemical Software</h3>
-                <p>{chemical.summary}</p><p>{chemical.responsibility}</p>
-                <ul class="pills"><li>NestJS</li><li>PostgreSQL</li><li>TypeORM</li></ul>
-                <a class="inline" href={chemical.links[0].href} {...external(chemical.links[0].external)}>{chemical.links[0].label} <span aria-hidden="true">↗</span></a>
-              </div>
-            </div>
-            <details class="special-details"><summary>Ver alcance técnico <span aria-hidden="true">+</span></summary><ul>{chemical.decisions.map((item) => <li>{item}</li>)}</ul></details>
-          </article>
-          <div class="special-pair">
+          <div class="specialized-layout">
             <article id="cercaya" class="cercaya" aria-labelledby="cercaya-title" data-project-copy data-reveal>
               <p class="eyebrow">Java / seguridad · {cercaya.status}</p><h3 id="cercaya-title">Cercaya</h3>
               <p>{cercaya.summary}</p>
@@ -151,7 +139,16 @@ const personSchema = {
               <a class="inline" href={cercaya.links[0].href} {...external(cercaya.links[0].external)}>{cercaya.links[0].label} <span aria-hidden="true">↗</span></a>
               <details class="special-details"><summary>Ver alcance técnico <span aria-hidden="true">+</span></summary><ul>{cercaya.decisions.map((item) => <li>{item}</li>)}</ul></details>
             </article>
-            <article id="memoriesai" class="memories" aria-labelledby="memories-title" data-reveal>
+              <article id="chemical-software" class="chemical" aria-labelledby="chemical-title" data-project-copy data-reveal>
+                <div class="chemical-copy">
+                  <p class="eyebrow">{chemical.status}</p><h3 id="chemical-title">Chemical Software</h3>
+                  <p>{chemical.summary}</p><p>{chemical.responsibility}</p>
+                  <ul class="pills"><li>NestJS</li><li>PostgreSQL</li><li>TypeORM</li></ul>
+                  <a class="inline" href={chemical.links[0].href} {...external(chemical.links[0].external)}>{chemical.links[0].label} <span aria-hidden="true">↗</span></a>
+                  <details class="special-details"><summary>Ver alcance técnico <span aria-hidden="true">+</span></summary><ul>{chemical.decisions.map((item) => <li>{item}</li>)}</ul></details>
+                </div>
+              </article>
+              <article id="memoriesai" class="memories" aria-labelledby="memories-title" data-reveal>
               <div class="memories-intro" data-project-copy>
                 <p class="eyebrow">Herramienta interna · Python</p><h3 id="memories-title">MemoriesAI</h3>
                 <p>{memories.summary}</p>
@@ -164,7 +161,7 @@ const personSchema = {
               </dl>
               <ul class="pills"><li>Python</li><li>BM25</li><li>SQLite</li><li>CLI</li></ul>
               <details class="special-details memories-details"><summary>Ver decisiones de implementación <span aria-hidden="true">+</span></summary><ul>{memories.decisions.map((item) => <li>{item}</li>)}</ul></details>
-            </article>
+              </article>
           </div>
         </section>
       </section>
