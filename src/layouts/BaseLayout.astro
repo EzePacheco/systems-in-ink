@@ -2,6 +2,7 @@
 import "@fontsource-variable/manrope";
 import "../styles/portfolio.css";
 import Header from "../components/layout/Header.astro";
+import ActionLink from "../components/ActionLink.astro";
 import { capabilities, datamark, experience, links, metadata, profile, projects } from "../data/portfolio.data";
 
 const socialImage = new URL(metadata.ogImage, metadata.url).href;
@@ -82,6 +83,9 @@ const agentContextJson = JSON.stringify(agentContext).replaceAll("<", "\\u003c")
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <Header />
+    <aside class="mobile-floating-cv" aria-label="Descarga del CV" data-floating-cv>
+      <ActionLink href={profile.cvPath} label="CV" ariaLabel="Descargar CV" title="Descargar CV" variant="dark" download />
+    </aside>
     <slot />
     <footer class="footer"><span>© {new Date().getFullYear()} {profile.name}</span></footer>
     <script>

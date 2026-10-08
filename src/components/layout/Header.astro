@@ -18,7 +18,4 @@ import { navItems, profile } from "../../data/portfolio.data";
       {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
   </details>
-  <div class="mobile-floating-cv" data-floating-cv>
-    <ActionLink href={profile.cvPath} label="CV" ariaLabel="Descargar CV" title="Descargar CV" variant="dark" download />
-  </div>
 </header>
