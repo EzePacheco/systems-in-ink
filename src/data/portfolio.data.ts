@@ -1,5 +1,4 @@
 import type { ImageMetadata } from "astro";
-import chichitosVisual from "../assets/cases/chichitos-real.webp";
 import elementosOfertas from "../assets/cases/elementos/ofertas.png";
 import elementosInicio from "../assets/cases/elementos/inicio.png";
 import elementosCatalogo from "../assets/cases/elementos/catalogo.png";
@@ -9,32 +8,25 @@ import editorMetricsMendoza from "../assets/cases/el-editor/metricas-mendoza.png
 import editorMetricsPlatense from "../assets/cases/el-editor/metricas-platense.png";
 import minecallWorld from "../assets/cases/minecall/mundo.png";
 import minecallAccess from "../assets/cases/minecall/acceso.png";
+import chemicalInventory from "../assets/cases/chemical/04-admin-inventario.png";
+import chemicalCompanies from "../assets/cases/chemical/01-superadmin-comercios.png";
+import chemicalPurchases from "../assets/cases/chemical/05-admin-compras-recepciones.png";
+import chemicalSales from "../assets/cases/chemical/07-admin-pos-carrito.png";
+import chemicalPermissions from "../assets/cases/chemical/10-admin-configuracion-equipo.png";
 
 export type LinkItem = {
   label: string;
   href: string;
-  display?: string;
   external?: boolean;
-  download?: boolean;
 };
 
 export type Project = {
   id: string;
-  index: string;
   title: string;
-  status: string;
-  prominence: "featured" | "compact";
   summary: string;
-  problem: string;
   responsibility: string;
   decisions: string[];
-  evidence: string[];
   stack: string[];
-  media?: {
-    src: ImageMetadata;
-    alt: string;
-    caption?: string;
-  };
   gallery?: {
     src: ImageMetadata;
     label: string;
@@ -50,17 +42,11 @@ export type ExperienceItem = {
   description: string;
 };
 
-export type Capability = {
-  index: string;
-  title: string;
-  description: string;
-  items: string[];
-};
-
 export const metadata = {
+  url: "https://portfolio-eze-pacheco.vercel.app/",
   title: "Ezequiel Pacheco | Backend Developer & Full Stack Developer",
   description:
-    "Backend Developer y Full Stack Developer especializado en Node.js, TypeScript y PostgreSQL, con experiencia en Go, Java/Spring Boot, React y Next.js. APIs, sistemas realtime, SaaS, ecommerce e IA aplicada al desarrollo.",
+    "Backend Developer / Full Stack Developer con foco en Node.js, TypeScript y PostgreSQL. APIs, autorización, transacciones y procesamiento asíncrono; alcance frontend con React y Next.js.",
   ogImage: "/portfolio-social.jpg",
 };
 
@@ -68,12 +54,24 @@ export const profile = {
   name: "Ezequiel Pacheco",
   role: "Backend Developer | Full Stack Developer",
   location: "Buenos Aires, Argentina",
-  currentCompany: "Empresa privada — Plataformas digitales",
   email: "ezequielpacheco.dev@gmail.com",
-  cvPath: "/Ezequiel_Pacheco_CV_JUL_2026.pdf",
-  heroDescription:
-    "Diseño y construyo sistemas web end-to-end con Node.js, TypeScript y PostgreSQL: APIs, datos, seguridad, integraciones, testing y operación. También desarrollo backend con Go y Java/Spring Boot.",
-  footerNote: "Backend, full stack y operación de productos web.",
+  cvPath: "/Ezequiel_Pacheco_Backend_FullStack_CV_ES_2026.pdf",
+};
+
+export const capabilities = {
+  focus: "Backend Developer",
+  scope: "Full Stack",
+  coreBackend: [
+    { technology: "Node.js", evidence: "APIs y procesamiento asíncrono", href: "#editor-title", project: "El Editor" },
+    { technology: "TypeScript", evidence: "Backend con NestJS", href: "#chemical-title", project: "Chemical Software" },
+    { technology: "PostgreSQL", evidence: "Datos y consistencia transaccional", href: "#elementos-title", project: "Elementos" },
+  ],
+  groups: [
+    { label: "Backend e integraciones", technologies: ["Express", "NestJS", "Redis", "REST / OpenAPI", "WebSockets"] },
+    { label: "Alcance frontend", technologies: ["React", "Next.js"] },
+    { label: "Experiencia adicional", technologies: ["Go", "Java / Spring Boot", "Python"] },
+  ],
+  support: "Pruebas unitarias y de integración · Git · Docker · GitHub Actions.",
 };
 
 const mailtoHref = (subject?: string) =>
@@ -85,83 +83,42 @@ export const links = {
   github: {
     label: "GitHub",
     href: "https://github.com/EzePacheco",
-    display: "/EzePacheco",
     external: true,
   },
   linkedin: {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/ezepacheco-dev/",
-    display: "/in/ezepacheco-dev",
     external: true,
   },
   email: {
     label: "Email",
     href: emailHref,
-    display: profile.email,
     external: true,
   },
 } satisfies Record<string, LinkItem>;
 
 export const navItems: LinkItem[] = [
-  { label: "Experiencia", href: "#experiencia" },
   { label: "Proyectos", href: "#proyectos" },
   { label: "Capacidades", href: "#capacidades" },
+  { label: "Experiencia", href: "#experiencia" },
   { label: "Contacto", href: "#contacto" },
-];
-
-export const heroActions: LinkItem[] = [
-  { label: "Ver proyectos", href: "#proyectos" },
-  {
-    label: "Descargar CV",
-    href: profile.cvPath,
-    download: true,
-  },
-  links.linkedin,
-  links.github,
-  { label: "Contacto", href: "#contacto" },
-];
-
-export const recruiterProof = [
-  {
-    value: "Node.js · TypeScript · PostgreSQL",
-    label: "Núcleo backend",
-  },
-  {
-    value: "NestJS · Go · Java / Spring Boot",
-    label: "Otros ecosistemas backend",
-  },
-  {
-    value: "React · Next.js",
-    label: "Alcance full stack",
-  },
 ];
 
 export const projects: Project[] = [
   {
     id: "elementos",
-    index: "01",
-    title: "Elementos — Marketplace B2B/B2C",
-    status: "En desarrollo",
-    prominence: "featured",
+    title: "Elementos",
     summary:
-      "Marketplace de materiales de construcción con catálogo, inventario, carrito multiseller, checkout, pagos y gestión de órdenes.",
-    problem:
-      "Sostener catálogo, comercios, inventario, reservas, checkout y finanzas con límites de dominio claros y consistencia transaccional.",
+      "Marketplace de materiales de construcción en desarrollo, con inventario, carrito multiseller, checkout y gestión de órdenes.",
     responsibility:
-      "Diseñé y evolucioné su backend modular en Node.js, Express y PostgreSQL, con más de 30 módulos de negocio, contratos OpenAPI y pruebas. Implementé controles de consistencia, procesamiento asíncrono e integraciones de pago.",
+      "En equipo, diseñé la API modular Node.js/Express y PostgreSQL e implementé inventario, carrito y Mercado Pago. Endurecí checkout y permisos con controles transaccionales, y desarrollé workers de importación recuperables.",
     decisions: [
-      "Organicé el monolito modular con composition root, DI manual, casos de uso, repositorios y adapters/gateways.",
-      "Implementé sesiones, cookies seguras, OAuth, OTP, RBAC, auditoría y rate limiting con autorización en el servidor.",
-      "Resolví flujos transaccionales con constraints, FOR UPDATE, idempotencia, índices, query plans y performance gates.",
-      "Integré Mercado Pago: Checkout Pro, payment intents, webhooks, reconciliación, refunds, ledger, holds y payouts.",
+      "Diseñé la base modular con casos de uso, repositorios, migraciones y contratos OpenAPI.",
+      "Endurecí checkout y cambios de permisos con controles transaccionales y serialización de operaciones sensibles.",
+      "Integré Mercado Pago Checkout Pro y devoluciones con idempotencia.",
+      "Implementé recuperación de workers de importación con leases persistidos, heartbeat y fencing.",
     ],
-    evidence: [
-      "Marketplace transaccional complejo",
-      "Seguridad, órdenes y pagos",
-      "Jobs idempotentes y realtime",
-      "Observabilidad y rendimiento",
-    ],
-    stack: ["Node.js", "Express", "PostgreSQL", "Sequelize", "Umzug", "React", "Next.js", "Mercado Pago", "S3", "OpenAPI"],
+    stack: ["Node.js","Express","PostgreSQL","Mercado Pago"],
     gallery: [
       {
         src: elementosOfertas,
@@ -189,29 +146,18 @@ export const projects: Project[] = [
   },
   {
     id: "el-editor-cms",
-    index: "02",
-    title: "El Editor — CMS editorial multitenant + portales públicos",
-    status: "En producción",
-    prominence: "featured",
+    title: "El Editor",
     summary:
-      "CMS editorial multitenant con dos portales públicos en producción.",
-    problem:
-      "Unificar la operación editorial multitenant sin duplicar producto, manteniendo permisos, flujos y salida pública por portal.",
+      "CMS editorial multitenant con dos portales públicos en producción: El Editor Platense y El Editor Mendoza.",
     responsibility:
-      "Desarrollé y evolucioné componentes del backend Node.js/Express, el CMS React y los portales Next.js. Implementé permisos, publicación editorial, gestión de media, métricas e integraciones; también trabajé sobre ISR, SEO y WebSub.",
+      "En equipo, evolucioné APIs Node.js/Express con aislamiento por tenant y RBAC. Implementé WebSub persistente con reintentos y jobs idempotentes recuperables; contribuí al CMS React y los portales Next.js.",
     decisions: [
-      "Separé CMS, API, portal público, UI compartida y notifier WebSub en responsabilidades explícitas.",
-      "Protegí multitenancy y RBAC en el servidor; la interfaz refleja permisos ya autorizados.",
-      "Coordiné publicación, programación editorial, ISR, revalidación on-demand, RSS/WebSub y SEO técnico.",
-      "Trabajé con health/readiness, structured logging, rate limiting, circuit breaker, caching e índices para operación.",
+      "Implementé aislamiento por tenant y permisos RBAC aplicados en el servidor.",
+      "Construí un publicador WebSub con persistencia de eventos y reintentos.",
+      "Agregué recuperación de jobs de edición mediante checkpoints transaccionales.",
+      "Mejoré ISR, caché y SEO del portal; desarrollé papelera/restauración de artículos y paneles administrativos en React.",
     ],
-    evidence: [
-      "Arquitectura multitenant y RBAC",
-      "Ciclo editorial y media",
-      "SEO, RSS, JSON-LD y analytics",
-      "Jobs e integraciones operativas",
-    ],
-    stack: ["Node.js", "Express", "PostgreSQL", "Sequelize", "React", "Next.js", "AWS S3 / CloudFront", "WebSub"],
+    stack: ["Node.js","Express","PostgreSQL","React","Next.js"],
     gallery: [
       {
         src: editorPlatense,
@@ -225,23 +171,23 @@ export const projects: Project[] = [
       },
       {
         src: editorMetricsMendoza,
-        label: "Métricas · Mendoza",
-        alt: "Panel real de métricas de El Editor Mendoza para el período mostrado en la interfaz.",
+        label: "Métricas del portal · Mendoza",
+        alt: "Captura del panel de métricas de El Editor Mendoza para el período mostrado.",
       },
       {
         src: editorMetricsPlatense,
-        label: "Métricas · Platense",
-        alt: "Panel real de métricas de El Editor Platense para el período mostrado en la interfaz.",
+        label: "Métricas del portal · Platense",
+        alt: "Captura del panel de métricas de El Editor Platense para el período mostrado.",
       },
     ],
     links: [
       {
-        label: "Abrir El Editor Platense",
+        label: "Ver portal Platense",
         href: "https://eleditorplatense.com/",
         external: true,
       },
       {
-        label: "Abrir El Editor Mendoza",
+        label: "Ver portal Mendoza",
         href: "https://eleditormendoza.com.ar/",
         external: true,
       },
@@ -249,24 +195,18 @@ export const projects: Project[] = [
   },
   {
     id: "minecall",
-    index: "03",
-    title: "MineCall — Oficina virtual en tiempo real",
-    status: "Demo pública",
-    prominence: "compact",
+    title: "MineCall",
     summary:
-      "Diseñé la base backend y operativa de una plataforma de oficina virtual realtime utilizando Go, PostgreSQL, WebSockets, Redis y LiveKit.",
-    problem:
-      "Sostener una experiencia realtime fluida con presencia efímera, media por proximidad y estado durable.",
+      "En un proyecto colaborativo, implementé coordinación de presencia en Go con Redis y outbox transaccional en PostgreSQL, además de restricciones de audio y video por proximidad aplicadas en el servidor con LiveKit.",
     responsibility:
-      "Diseñé la arquitectura modular en Go, datos, protocolos realtime, presencia distribuida, media por proximidad, billing, Control Center, testing y operación.",
+      "En un proyecto colaborativo de oficina virtual, implementé presencia y reconexión en Go/Redis, outbox transaccional en PostgreSQL y autorización de audio/video por proximidad en el servidor con LiveKit.",
     decisions: [
-      "Separé mutaciones durables por HTTP de presencia y movimiento con WebSockets autenticados y protocolos versionados.",
-      "Implementé presence, reconnect/replay, heartbeat, backpressure, goroutines/channels, Redis Pub/Sub y coordinación horizontal.",
-      "Usé PostgreSQL, pgx/sqlc, Goose y transactional outbox; LiveKit resuelve media y proximidad sin implementar WebRTC/SFU.",
-      "Sumé adapters de Stripe/Mercado Pago, Prometheus, load/soak tests y E2E con Playwright.",
+      "Implementé coordinación de presencia con Redis, leases y recuperación de conexiones.",
+      "Incorporé outbox transaccional en PostgreSQL para cambios durables.",
+      "Apliqué controles de membresía y proximidad en el servidor para autorizar audio/video mediante LiveKit.",
+      "Contribuí a Control Center y pruebas de reconexión y carga dentro del trabajo compartido.",
     ],
-    evidence: ["Backend modular en Go", "Realtime y presencia distribuida", "LiveKit y billing mediante adapters", "Prometheus, load/soak y E2E"],
-    stack: ["Go", "PostgreSQL", "Redis", "WebSockets", "LiveKit", "React", "Playwright"],
+    stack: ["Go","PostgreSQL","Redis","LiveKit"],
     gallery: [
       {
         src: minecallWorld,
@@ -281,7 +221,7 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        label: "Abrir MineCall",
+        label: "Abrir demo de MineCall",
         href: "https://minecall.online/",
         external: true,
       },
@@ -289,24 +229,17 @@ export const projects: Project[] = [
   },
   {
     id: "cercaya",
-    index: "04",
-    title: "Cercaya — Marketplace de servicios a domicilio",
-    status: "En desarrollo",
-    prominence: "compact",
+    title: "Cercaya",
     summary:
-      "Marketplace que conecta solicitantes y prestadores de servicios a domicilio.",
-    problem:
-      "Ofrecer una foundation modular y segura para el onboarding, solicitudes y evidencia privada, sin exponer información geográfica sensible.",
+      "Marketplace colaborativo de servicios a domicilio, en desarrollo.",
     responsibility:
-      "Construí la base backend y el flujo inicial del solicitante con Java, Spring Boot y PostgreSQL: identidad, solicitudes idempotentes, privacidad de ubicación e integración transaccional.",
+      "Implementé módulos de identidad OIDC, solicitudes idempotentes y privacidad de ubicación con Java, Spring Boot y PostgreSQL; extendí el catálogo canónico y su integración móvil. También desarrollé un módulo de evidencia con adaptadores sintéticos; su almacenamiento productivo sigue pendiente.",
     decisions: [
-      "Usé Spring Modulith, Spring JDBC y Flyway para módulos y límites explícitos, Problem Details y correlation IDs.",
-      "Protegí ownership y privacidad geográfica con autorización contextual, requests idempotentes, locks transaccionales e integración entre módulos.",
-      "Diseñé e implementé FB-07 Evidence Foundation: uploads idempotentes, grants/revoke, auditoría, borrado lógico, SHA-256 y sanitización de imágenes.",
-      "La foundation está limitada deliberadamente a fixtures sintéticos; incluye validación MIME/contenido, stripping de EXIF/geolocalización y revalidación antes de servir.",
+      "Implementé identidad OIDC y su vinculación con cuentas locales en un backend modular.",
+      "Protegí solicitudes con autorización contextual, idempotencia, controles transaccionales y privacidad geográfica.",
+      "Extendí el catálogo canónico Java/PostgreSQL y la selección de oficios en Expo/TypeScript, con sincronización serial y recuperación de errores.",
     ],
-    evidence: ["Java / Spring Boot modular", "Seguridad y privacidad por defecto", "Consistencia transaccional", "Integration tests con Testcontainers"],
-    stack: ["Java", "Spring Boot", "Spring Modulith", "Spring JDBC", "PostgreSQL", "Flyway", "Auth0 / OIDC", "JUnit", "Testcontainers", "React Native / Expo", "Astro"],
+    stack: ["Java / Spring Boot","Spring Modulith","PostgreSQL","OIDC"],
     links: [
       {
         label: "Pedir caso técnico",
@@ -317,24 +250,45 @@ export const projects: Project[] = [
   },
   {
     id: "chemical-software",
-    index: "05",
-    title: "Chemical Software — SaaS de gestión multicomercio",
-    status: "SaaS en desarrollo",
-    prominence: "compact",
+    title: "Chemical Software",
     summary:
-      "SaaS de gestión multicomercio con inventario, compras y operaciones por sucursal.",
-    problem:
-      "Unificar la operación diaria del negocio sin perder contexto de empresa, sucursal, rol ni trazabilidad de inventario.",
+      "Sistema colaborativo de gestión multicomercio en desarrollo para inventario, compras y ventas, con contexto por empresa y sucursal.",
     responsibility:
-      "Diseñé e implementé capacidades centrales con NestJS, PostgreSQL y TypeORM: multitenancy, sesiones y permisos por sucursal, inventario transaccional, costos y auditoría.",
+      "Implementé multitenancy y permisos por comercio/sucursal, reservas de stock y auditoría con NestJS, TypeScript y PostgreSQL. Extendí transformación y costeo como piloto técnico.",
     decisions: [
-      "Aislé el contexto de comercio principalmente en la aplicación con AsyncLocalStorage request scope, guards y validaciones de membresía; no uso PostgreSQL RLS.",
-      "Protegí JWT/cookies, roles y permisos por sucursal en el servidor y mantuve auditoría en operaciones sensibles.",
-      "Resolví inventory, purchases, stock ledger, reservations, landed cost y precision handling como operaciones bloqueadas, idempotentes y auditables.",
-      "Trabajé sobre React, TanStack Query, migraciones, E2E y CI como parte del flujo end-to-end.",
+      "Derivé el contexto de empresa y sucursal en el servidor mediante membresías y controles de acceso.",
+      "Protegí cambios del último administrador con bloqueo transaccional y agregué auditoría por empresa.",
+      "Implementé reservas de stock persistidas para controlar su disponibilidad.",
+      "Desarrollé transformación productiva y costeo para un piloto técnico; su aceptación operativa sigue pendiente.",
     ],
-    evidence: ["Multitenancy aplicado", "Inventario y trazabilidad", "OpenAPI, migraciones y E2E", "CI y frontend conectado"],
-    stack: ["NestJS", "TypeScript", "PostgreSQL", "TypeORM", "React", "TanStack Query", "OpenAPI", "GitHub Actions"],
+    stack: ["NestJS","TypeScript","PostgreSQL","TypeORM"],
+    gallery: [
+      {
+        src: chemicalInventory,
+        label: "Inventario",
+        alt: "Chemical Software: inventario de la sucursal activa con disponibilidad, reservas, valoración y movimientos; datos de demostración.",
+      },
+      {
+        src: chemicalCompanies,
+        label: "Comercios",
+        alt: "Chemical Software: administración de comercios y su primer administrador desde la plataforma multicomercio; datos de demostración.",
+      },
+      {
+        src: chemicalPurchases,
+        label: "Compras y recepciones",
+        alt: "Chemical Software: recepción de compra confirmada con proveedor, líneas, costos y actualización de stock; datos de demostración.",
+      },
+      {
+        src: chemicalSales,
+        label: "Crear venta",
+        alt: "Chemical Software: creación de una venta con selección de productos, cliente, cantidades y medio de pago; datos de demostración.",
+      },
+      {
+        src: chemicalPermissions,
+        label: "Usuarios y permisos",
+        alt: "Chemical Software: equipo del comercio con roles y alcance por sucursal en la configuración de usuarios y permisos; datos de demostración.",
+      },
+    ],
     links: [
       {
         label: "Pedir caso técnico",
@@ -345,23 +299,17 @@ export const projects: Project[] = [
   },
   {
     id: "memoriesai",
-    index: "06",
-    title: "MemoriesAI — Memoria durable y verificable para agentes",
-    status: "Proyecto propio",
-    prominence: "compact",
+    title: "MemoriesAI",
     summary:
-      "Desarrollé una herramienta local en Python para conservar y recuperar decisiones, aprendizajes y procedimientos entre sesiones de trabajo con agentes de software.",
-    problem:
-      "Preservar contexto útil entre sesiones sin desplazar la autoridad del código, contratos y documentación actual del proyecto.",
+      "Desarrollé una CLI Python para recuperar contexto técnico con búsqueda BM25, índices SQLite y procedencia de fuentes. Extendí la recuperación acotada de documentos y sus pruebas.",
     responsibility:
-      "Diseñé e implementé el modelo de memoria, lifecycle gobernado, CLI, retrieval, context assembly, journal/recovery, telemetry, adapter para Codex y portabilidad POSIX/Windows.",
+      "Desarrollé una CLI local para conservar y recuperar contexto técnico por proyecto. Extendí la recuperación acotada de documentos con procedencia verificable y pruebas.",
     decisions: [
-      "Mantengo Markdown como source of truth, con provenance, ownership, estados, relaciones, project scopes e índices SQLite reconstruibles.",
-      "Uso BM25 por secciones como mecanismo principal y evalúo retrieval y context assembly de manera verificable.",
-      "Embeddings, vector retrieval e hybrid-vector existen como extensiones experimentales y opt-in; el flujo principal es local, determinista y agnóstico al proveedor/modelo.",
+      "Mantengo Markdown como fuente e índices SQLite reconstruibles; BM25/FTS5 es el mecanismo principal de búsqueda.",
+      "Incorporé catálogo y recuperación acotada de documentos con hashes, localizadores y procedencia.",
+      "El contexto histórico conserva su origen y se contrasta con las fuentes actuales antes de usarse para decidir cambios.",
     ],
-    evidence: ["Lifecycle, provenance y ownership", "BM25 y FTS5 local", "Índices y recovery reconstruibles", "Adapter de Codex y portabilidad"],
-    stack: ["Python", "BM25", "SQLite", "FTS5", "FastEmbed (experimental)", "CLI"],
+    stack: ["Python","BM25","SQLite","FTS5"],
     links: [
       {
         label: "Pedir caso técnico",
@@ -372,114 +320,61 @@ export const projects: Project[] = [
   },
   {
     id: "chichitos-ecommerce",
-    index: "07",
     title: "Chichitos",
-    status: "Proyecto ecommerce",
-    prominence: "compact",
     summary:
-      "Ecommerce end-to-end desarrollado con Next.js, TypeScript y Supabase, con catálogo, stock, reservas, checkout y pagos idempotentes mediante Mercado Pago.",
-    problem: "Convertir un catálogo configurable en una compra segura con precio, stock, envío y pago validados en servidor.",
-    responsibility: "Desarrollé el producto end-to-end: storefront, administración, catálogo, stock, reservas, checkout, persistencia, pagos y despliegue.",
+      "Ecommerce de indumentaria con Next.js, TypeScript y Supabase. Implementé checkout con validación de precios y stock en servidor, reservas e integración con Mercado Pago mediante webhooks firmados e idempotentes.",
+    responsibility: "Implementé checkout con validación de precios y stock en servidor, reservas e integración con Mercado Pago mediante webhooks firmados e idempotentes.",
     decisions: [
-      "Recalcular carrito, precios y envío en el servidor antes de crear el pago.",
-      "Confirmar pagos mediante webhook firmado e idempotente.",
+      "Recalculé carrito, precios y envío en el servidor antes de crear el pago.",
+      "Confirmé pagos mediante webhooks firmados e idempotentes.",
     ],
-    evidence: ["Storefront y administración", "Stock y reservas", "Pagos idempotentes", "Tests y despliegue"],
     stack: ["Next.js", "TypeScript", "Supabase", "Mercado Pago"],
-    media: {
-      src: chichitosVisual,
-      alt: "Detalle público de una prenda configurable en el storefront de Chichitos",
-      caption: "Storefront público · sin datos personales",
-    },
     links: [
       { label: "Ver repositorio", href: "https://github.com/EzePacheco/chichitos-ecommerce", external: true },
     ],
   },
 ];
 
+export const datamark = {
+  title: "DATAMARK",
+  summary:
+    "MVP para comercios desarrollado en equipo durante una simulación profesional de No Country. Implementé autenticación, onboarding y funcionalidades de ventas con Node.js, JavaScript, Express, PostgreSQL y Prisma; integré pantallas React de productos, clientes y ventas con la API.",
+  stack: ["Node.js", "JavaScript", "Express", "PostgreSQL", "Prisma"],
+};
+
 export const experience: ExperienceItem[] = [
   {
     date: "Marzo 2026 — Actualidad",
     company: "Empresa privada — Plataformas digitales",
-    role: "Full Stack Developer (Backend-Oriented)",
+    role: "Full Stack Developer — orientación Backend",
     description:
-      "Participo desde el relevamiento y especificación de requerimientos hasta arquitectura, implementación, pruebas y evolución de sistemas en producción.",
+      "Desarrollo Backend / Full Stack de El Editor y Elementos en equipo, con responsabilidad en APIs, datos, autorización, integraciones y pruebas.",
   },
   {
     date: "Feb — Mar 2026",
-    company: "DATAMARK",
+    company: "No Country — DATAMARK",
     role: "Full Stack Developer",
     description:
-      "MVP B2B SaaS para ventas, inventario, clientes y analítica con backend en capas y PostgreSQL.",
+      "Simulación profesional colaborativa: autenticación, onboarding y ventas con Node.js/JavaScript, e integración de pantallas React con la API.",
   },
   {
     date: "Sep 2023 — Abr 2026",
     company: "Burgers Thrones",
     role: "Fundador & Responsable de Operaciones",
     description:
-      "Operación, stock, atención al cliente y decisiones de negocio apoyadas en datos.",
+      "Gestioné producción, stock, procesos y atención al cliente.",
   },
   {
     date: "2019 — 2023",
     company: "Grupo MSA",
     role: "Técnico de Producción & QA",
     description:
-      "Testing funcional de hardware y software, diagnóstico y reporte de defectos críticos.",
+      "Realicé pruebas funcionales de hardware y software, diagnóstico y reporte de incidencias.",
   },
 ];
 
-export const capabilities: Capability[] = [
-  {
-    index: "01",
-    title: "Backend",
-    description:
-      "Diseño APIs, módulos y modelos de datos con contratos, permisos y consistencia explícitos.",
-    items: ["Node.js", "TypeScript", "JavaScript", "Express", "NestJS", "Go", "Java", "Spring Boot", "Python", "REST APIs", "OpenAPI", "WebSockets"],
-  },
-  {
-    index: "02",
-    title: "Datos",
-    description:
-      "Trabajo con datos relacionales, migraciones, acceso explícito a persistencia y rendimiento de consultas.",
-    items: ["PostgreSQL", "Redis", "MongoDB", "Sequelize", "TypeORM", "Prisma", "Spring JDBC", "Flyway", "Umzug"],
-  },
-  {
-    index: "03",
-    title: "Frontend",
-    description:
-      "Implemento experiencias conectadas a contratos y reglas reales del sistema cuando el producto lo requiere.",
-    items: ["React", "Next.js", "React Native / Expo", "Astro", "Vite", "TanStack Query", "Tailwind CSS"],
-  },
-  {
-    index: "04",
-    title: "Arquitectura y seguridad",
-    description: "Protejo invariantes, límites de dominio y flujos sensibles desde el backend.",
-    items: ["Modular Monolith", "Multitenancy", "OIDC", "JWT", "Sessions", "RBAC", "Idempotency", "Background Jobs", "Rate Limiting"],
-  },
-  {
-    index: "05",
-    title: "Testing",
-    description: "Verifico comportamiento y flujos críticos en las capas que los implementan.",
-    items: ["Vitest", "Supertest", "Playwright", "JUnit", "Testcontainers", "API testing", "Contract testing", "Integration testing", "E2E", "Performance testing"],
-  },
-  {
-    index: "06",
-    title: "Operación",
-    description: "Incorporo prácticas que hacen observable y operable un sistema en evolución.",
-    items: ["Git", "GitHub Actions", "Docker", "AWS S3 / CloudFront", "Metrics", "Tracing", "Health / readiness"],
-  },
-  {
-    index: "07",
-    title: "AI-assisted engineering",
-    description: "Uso agentes para análisis, implementación, pruebas y revisión, manteniendo la responsabilidad técnica humana.",
-    items: ["Codex", "Claude Code", "Spec-Driven Development", "Test-Driven Development", "Agent workflows"],
-  },
-];
-
-export const contact = {
-  eyebrow: "Hablemos",
-  title: "¿Buscás un Backend / Full Stack Developer?",
-  description:
-    "Disponible para oportunidades remotas en LATAM o en Buenos Aires. Hablemos de backend, datos, integraciones y productos end-to-end.",
-  links: [links.email, links.linkedin, links.github],
-};
+export function getProject(id: string): Project {
+  const project = projects.find((item) => item.id === id);
+  if (!project) throw new Error(`Unknown portfolio project: ${id}`);
+  return project;
+}

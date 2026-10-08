@@ -1,27 +1,24 @@
 ---
-import type { LinkItem } from "../../data/portfolio.data";
-
-interface Props {
-  links: LinkItem[];
-  cvPath: string;
-}
-
-const { links, cvPath } = Astro.props;
+import ActionLink from "../ActionLink.astro";
+import { navItems, profile } from "../../data/portfolio.data";
 ---
 
 <header class="site-header">
-  <nav class="site-nav" aria-label="Navegación principal">
-    {
-      links.map((link) => (
-        <a href={link.href}>
-          {link.label}
-        </a>
-      ))
-    }
+  <a class="brand" href="#inicio">Ezequiel Pacheco</a>
+  <nav class="desktop-nav" aria-label="Navegación principal">
+    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
   </nav>
-
-  <a class="mobile-cv" href={cvPath} download>
-    CV
-    <span aria-hidden="true">↓</span>
-  </a>
+  <ActionLink href={profile.cvPath} label="Descargar CV" variant="dark" download />
+  <details class="mobile-menu" data-mobile-menu>
+    <summary aria-label="Menú de navegación" title="Menú">
+      <svg class="menu-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg class="menu-close-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </summary>
+    <nav aria-label="Navegación móvil">
+      {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </details>
+  <div class="mobile-floating-cv" data-floating-cv>
+    <ActionLink href={profile.cvPath} label="CV" ariaLabel="Descargar CV" title="Descargar CV" variant="dark" download />
+  </div>
 </header>

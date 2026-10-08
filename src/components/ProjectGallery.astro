@@ -19,7 +19,36 @@ const galleryId = `gallery-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 ---
 
 {images.length > 0 && (
-  <div class="project-gallery" data-project-gallery>
+  <div class="project-gallery" data-project-gallery style={`--gallery-ratio: ${images[0].src.width} / ${images[0].src.height}`}>
+
+
+    {images.map((image, index) => (
+      <figure
+        id={`${galleryId}-panel-${index}`}
+        class="project-gallery__panel"
+        role="tabpanel"
+        aria-labelledby={`${galleryId}-tab-${index}`}
+        hidden={index !== 0}
+      >
+        <div class="project-gallery__frame">
+          <a class="project-gallery__preview-link" data-gallery-open data-label={image.label} data-alt={image.alt} data-width={image.src.width} data-height={image.src.height} href={image.src.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar ${image.label}`}>
+          <Image
+            src={image.src}
+            alt={image.alt}
+            widths={[640, 960, 1280, 1600, 1920]}
+            sizes="(max-width: 680px) calc(100vw - 64px), (max-width: 960px) 88vw, 54vw"
+            format="webp"
+            loading={priority && index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+          <span class="project-gallery__expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><path d="m3 3 6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg></span>
+          </a>
+        </div>
+      </figure>
+    ))}
+    <p class="project-gallery__current" data-gallery-current><span>{images[0].label}</span><span>{`1 / ${images.length}`}</span></p>
+    <div class="project-gallery__carousel" data-gallery-carousel hidden>
+    <button class="project-gallery__arrow" type="button" data-gallery-prev aria-label={`Vista anterior de ${label}`}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg></button>
     <div class="project-gallery__tabs" role="tablist" aria-label={`Vistas de ${label}`}>
       {images.map((image, index) => (
         <button
@@ -31,40 +60,49 @@ const galleryId = `gallery-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
           tabindex={index === 0 ? 0 : -1}
           hidden={index !== 0}
           data-gallery-tab
+          aria-label={image.label}
+          title={image.label}
         >
-          {image.label}
+          <Image src={image.src} alt="" widths={[160, 240]} sizes="100px" format="webp" loading="lazy" decoding="async" />
         </button>
       ))}
     </div>
-
-    {images.map((image, index) => (
-      <figure
-        id={`${galleryId}-panel-${index}`}
-        class="project-gallery__panel"
-        role="tabpanel"
-        aria-labelledby={`${galleryId}-tab-${index}`}
-        tabindex="0"
-        hidden={index !== 0}
-      >
-        <div class="project-gallery__frame" style={`--gallery-ratio: ${image.src.width} / ${image.src.height}`}>
-          <Image
-            src={image.src}
-            alt={image.alt}
-            widths={[640, 960, 1280, 1600, 1920]}
-            sizes="(max-width: 680px) calc(100vw - 64px), (max-width: 960px) 88vw, 54vw"
-            format="webp"
-            loading={priority && index === 0 ? "eager" : "lazy"}
-            decoding="async"
-          />
+    <button class="project-gallery__arrow" type="button" data-gallery-next aria-label={`Vista siguiente de ${label}`}><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m10 5 7 7-7 7"/></svg></button>
+    </div>
+    <dialog class="capture-viewer" aria-labelledby={`${galleryId}-viewer-title`} data-capture-viewer>
+      <div class="capture-viewer__shell">
+        <header class="capture-viewer__header">
+          <div class="capture-viewer__title"><h2 id={`${galleryId}-viewer-title`}>{label}</h2><p data-viewer-status aria-live="polite" aria-atomic="true"></p></div>
+          <div class="capture-viewer__actions">
+            <button type="button" data-viewer-zoom aria-pressed="false" aria-label="100%: Ver captura a tamaño original" title="Tamaño original">100%</button>
+            <a data-viewer-original target="_blank" rel="noopener noreferrer" aria-label="Abrir archivo original en otra pestaña" title="Abrir archivo original">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7m0-7L10 14"/><path d="M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></svg>
+            </a>
+            <button type="button" data-viewer-close autofocus aria-label="Cerrar visor" title="Cerrar (Escape)">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+            </button>
+          </div>
+        </header>
+        <div class="capture-viewer__canvas">
+          <button class="capture-viewer__arrow" type="button" data-viewer-prev aria-label="Captura anterior">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg>
+          </button>
+          <div class="capture-viewer__stage" data-viewer-stage tabindex="0" aria-label="Captura ampliada; en tamaño original podés desplazarte para ver el detalle">
+            <img data-viewer-image src={images[0].src.src} alt={images[0].alt} width={images[0].src.width} height={images[0].src.height} loading="lazy" decoding="async" />
+          </div>
+          <button class="capture-viewer__arrow" type="button" data-viewer-next aria-label="Captura siguiente">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m10 5 7 7-7 7"/></svg>
+          </button>
         </div>
-        <figcaption>
-          <span>{image.label}</span>
-          <a href={image.src.src} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${image.label} en tamaño completo`}>
-            Ampliar captura <span aria-hidden="true">↗</span>
-          </a>
-        </figcaption>
-      </figure>
-    ))}
+        <nav class="capture-viewer__thumbnails" aria-label={`Elegir captura de ${label}`}>
+          {images.map((image, index) => (
+            <button type="button" data-viewer-thumbnail={index} aria-label={image.label} aria-current={index === 0 ? "true" : "false"}>
+              <Image src={image.src} alt="" widths={[160, 240]} sizes="100px" format="webp" loading="lazy" decoding="async" />
+            </button>
+          ))}
+        </nav>
+      </div>
+    </dialog>
   </div>
 )}
 
@@ -72,9 +110,13 @@ const galleryId = `gallery-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   document.querySelectorAll<HTMLElement>("[data-project-gallery]").forEach((gallery) => {
     const tabs = Array.from(gallery.querySelectorAll<HTMLButtonElement>("[data-gallery-tab]"));
     const panels = Array.from(gallery.querySelectorAll<HTMLElement>("[role='tabpanel']"));
-    if (tabs.length < 2) return;
 
+
+    const caption = gallery.querySelector<HTMLElement>("[data-gallery-current]")!;
+    let selectedIndex = 0;
     const select = (index: number, moveFocus = false) => {
+      selectedIndex = (index + tabs.length) % tabs.length;
+      index = selectedIndex;
       tabs.forEach((tab, tabIndex) => {
         const selected = tabIndex === index;
         tab.hidden = false;
@@ -82,12 +124,116 @@ const galleryId = `gallery-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
         tab.tabIndex = selected ? 0 : -1;
         panels[tabIndex].hidden = !selected;
       });
-      if (moveFocus) tabs[index].focus();
+      caption.children[0].textContent = tabs[index].getAttribute("aria-label");
+      caption.children[1].textContent = `${index + 1} / ${tabs.length}`;
+      if (moveFocus) tabs[index].focus({ preventScroll: true });
+      tabs[index].scrollIntoView({ block: "nearest", inline: "nearest" });
     };
 
+    const dialog = gallery.querySelector<HTMLDialogElement>("[data-capture-viewer]")!;
+    const links = Array.from(gallery.querySelectorAll<HTMLAnchorElement>("[data-gallery-open]"));
+    const image = dialog.querySelector<HTMLImageElement>("[data-viewer-image]")!;
+    const stage = dialog.querySelector<HTMLElement>("[data-viewer-stage]")!;
+    const status = dialog.querySelector<HTMLElement>("[data-viewer-status]")!;
+    const zoom = dialog.querySelector<HTMLButtonElement>("[data-viewer-zoom]")!;
+    const original = dialog.querySelector<HTMLAnchorElement>("[data-viewer-original]")!;
+    const close = dialog.querySelector<HTMLButtonElement>("[data-viewer-close]")!;
+    const thumbnails = Array.from(dialog.querySelectorAll<HTMLButtonElement>("[data-viewer-thumbnail]"));
+    let current = 0;
+    let trigger: HTMLElement | null = null;
+    let previousOverflow = "";
+    const resetZoom = () => {
+      stage.classList.remove("is-zoomed");
+      zoom.setAttribute("aria-pressed", "false");
+      zoom.textContent = "100%";
+      zoom.setAttribute("aria-label", "100%: Ver captura a tamaño original");
+      stage.scrollTo(0, 0);
+    };
+    const show = (index: number) => {
+      current = (index + links.length) % links.length;
+      const link = links[current];
+      resetZoom();
+      image.src = link.href;
+      image.alt = link.dataset.alt ?? "";
+      image.width = Number(link.dataset.width);
+      image.height = Number(link.dataset.height);
+      original.href = link.href;
+      thumbnails.forEach((thumbnail, thumbnailIndex) => thumbnail.setAttribute("aria-current", String(thumbnailIndex === current)));
+      if (dialog.open) thumbnails[current].scrollIntoView({ block: "nearest", inline: "nearest" });
+      status.textContent = `${current + 1} / ${links.length} · ${link.dataset.label}`;
+    };
+    thumbnails.forEach((thumbnail, index) => thumbnail.addEventListener("click", () => show(index)));
+    image.addEventListener("error", () => {
+      status.textContent = "No se pudo cargar la captura. Podés abrir el archivo original.";
+    });
+    links.forEach((link, index) => {
+      link.addEventListener("click", (event) => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !dialog.showModal) return;
+        event.preventDefault();
+        trigger = link;
+        show(index);
+        previousOverflow = document.documentElement.style.overflow;
+        dialog.showModal();
+        thumbnails[current].scrollIntoView({ block: "nearest", inline: "nearest" });
+        document.documentElement.style.overflow = "hidden";
+        close.focus();
+      });
+
+    });
+    dialog.querySelector<HTMLButtonElement>("[data-viewer-prev]")!.hidden = links.length < 2;
+    dialog.querySelector<HTMLButtonElement>("[data-viewer-next]")!.hidden = links.length < 2;
+    close.addEventListener("click", () => dialog.close());
+    dialog.querySelector("[data-viewer-prev]")!.addEventListener("click", () => show(current - 1));
+    dialog.querySelector("[data-viewer-next]")!.addEventListener("click", () => show(current + 1));
+    zoom.addEventListener("click", () => {
+      const expanded = stage.classList.toggle("is-zoomed");
+      zoom.setAttribute("aria-pressed", String(expanded));
+      zoom.textContent = expanded ? "Ajustar" : "100%";
+      zoom.setAttribute("aria-label", expanded ? "Ajustar captura al visor" : "100%: Ver captura a tamaño original");
+      stage.scrollTo(0, 0);
+    });
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "Tab") {
+        const focusable = Array.from(dialog.querySelectorAll<HTMLElement>("button, a[href], [tabindex='0']"))
+          .filter((element) => !element.hidden && element.getClientRects().length > 0);
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+      if (stage.classList.contains("is-zoomed")) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        show(current + (event.key === "ArrowRight" ? 1 : -1));
+      }
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      document.documentElement.style.overflow = previousOverflow;
+      resetZoom();
+      trigger?.focus({ preventScroll: true });
+    });
+
+    gallery.querySelector<HTMLElement>("[data-gallery-carousel]")!.hidden = false;
+    gallery.querySelector("[data-gallery-prev]")!.addEventListener("click", () => select(selectedIndex - 1));
+    gallery.querySelector("[data-gallery-next]")!.addEventListener("click", () => select(selectedIndex + 1));
     tabs.forEach((tab, index) => {
       tab.hidden = false;
       tab.addEventListener("click", () => select(index));
+      tab.addEventListener("pointerenter", (event) => {
+        if (event.pointerType === "mouse" && window.matchMedia("(any-hover: hover)").matches) {
+          select(index);
+        }
+      });
       tab.addEventListener("keydown", (event) => {
         let nextIndex: number | undefined;
         if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;

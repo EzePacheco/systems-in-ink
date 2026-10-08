@@ -1,15 +1,56 @@
 ---
 import "@fontsource-variable/manrope";
-import "../styles/tokens.css";
-import "../styles/global.css";
+import "../styles/portfolio.css";
+import Header from "../components/layout/Header.astro";
+import { capabilities, datamark, experience, links, metadata, profile, projects } from "../data/portfolio.data";
 
-interface Props {
-  title: string;
-  description: string;
-  ogImage?: string;
-}
-
-const { title, description, ogImage } = Astro.props;
+const socialImage = new URL(metadata.ogImage, metadata.url).href;
+const personSchema = {
+  "@context": "https://schema.org", "@type": "Person", name: profile.name,
+  url: metadata.url, jobTitle: profile.role, email: profile.email,
+  address: { "@type": "PostalAddress", addressLocality: "Buenos Aires", addressCountry: "AR" },
+  sameAs: [links.linkedin.href, links.github.href],
+  knowsAbout: ["Node.js", "TypeScript", "PostgreSQL", "NestJS", "Express", "React", "Next.js", "Go", "Java", "Spring Boot", "Python", "Software architecture", "Web application security"],
+};
+const agentProjects = [
+  ...projects.map(({ id, title, summary, responsibility, decisions, stack, gallery, links: projectLinks }) => ({
+    id,
+    title,
+    summary,
+    contribution: responsibility,
+    decisions,
+    technologies: stack,
+    evidence: gallery?.map(({ label, alt }) => ({ label, description: alt })) ?? [],
+    links: projectLinks.map(({ label, href }) => ({ label, url: href })),
+  })),
+  {
+    id: "datamark",
+    title: datamark.title,
+    summary: datamark.summary,
+    decisions: [],
+    technologies: datamark.stack,
+    evidence: [],
+    links: [],
+  },
+];
+const agentContext = {
+  profile: {
+    name: profile.name,
+    role: profile.role,
+    summary: metadata.description,
+    location: `${profile.location} · Remoto LATAM`,
+    contact: [
+      { label: "Email", url: links.email.href },
+      { label: "LinkedIn", url: links.linkedin.href },
+      { label: "GitHub", url: links.github.href },
+      { label: "Descargar CV", url: new URL(profile.cvPath, metadata.url).href },
+    ],
+  },
+  capabilities,
+  projects: agentProjects,
+  experience,
+};
+const agentContextJson = JSON.stringify(agentContext).replaceAll("<", "\\u003c");
 ---
 
 <!doctype html>
@@ -17,56 +58,34 @@ const { title, description, ogImage } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#030303" />
+    <meta name="description" content={metadata.description} />
+    <meta name="keywords" content="Backend Developer, Full Stack Developer, Node.js, TypeScript, PostgreSQL, Express, NestJS, React, Next.js, Go, Java, Spring Boot, Python" />
+    <meta name="theme-color" content="#f7f6f2" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={metadata.url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:url" content={metadata.url} />
+    <meta property="og:title" content={metadata.title} />
+    <meta property="og:description" content={metadata.description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Portfolio profesional de Ezequiel Pacheco" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <meta name="twitter:title" content={metadata.title} />
+    <meta name="twitter:description" content={metadata.description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    <script id="portfolio-agent-context" is:inline type="application/json" set:html={agentContextJson}></script>
+    <title>{metadata.title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#inicio">Saltar al contenido</a>
-    <div class="scroll-progress" aria-hidden="true"></div>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
     <slot />
-    <script is:inline>
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const enterTargets = Array.from(document.querySelectorAll("[data-enter]"));
-      const siteHeader = document.querySelector(".site-header");
-
-      const syncHeader = () => {
-        siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
-      };
-
-      syncHeader();
-      window.addEventListener("scroll", syncHeader, { passive: true });
-
-      if (!reducedMotion && "IntersectionObserver" in window) {
-        const enterObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              entry.target.classList.remove("enter-pending");
-              entry.target.classList.add("enter-visible");
-              enterObserver.unobserve(entry.target);
-            });
-          },
-          { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
-        );
-
-        enterTargets.forEach((target, index) => {
-          if (target.getBoundingClientRect().top <= window.innerHeight * 0.92) return;
-          target.style.setProperty("--enter-delay", `${Math.min(index % 3, 2) * 55}ms`);
-          target.classList.add("enter-pending");
-          enterObserver.observe(target);
-        });
-      }
+    <footer class="footer"><span>© {new Date().getFullYear()} {profile.name}</span></footer>
+    <script>
+      import "../scripts/portfolio";
     </script>
   </body>
 </html>
