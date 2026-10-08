@@ -1,29 +1,36 @@
-# Project media slots
+# Capturas y recursos visuales
 
-Las próximas capturas reales se sirven desde `public/projects/`. Los nombres reservados permiten
-mantener el layout y la carga de cada caso sin alterar la composición.
+Las galerías vigentes importan originales desde `src/assets/cases/`. No existe una ruta
+`public/projects/` ni un catálogo de slots pendientes. `ProjectGallery.astro` genera previews
+WebP responsive con `astro:assets`, miniaturas y un visor que permite abrir el archivo original.
+La proporción del primer original fija el marco de cada galería; las demás imágenes se ajustan
+con `object-fit: contain`, sin recortar ni alterar su contenido.
 
-| Proyecto | Archivo | Orientación / ratio | Contenido recomendado |
-| --- | --- | --- | --- |
-| Elementos | `elementos/portal.webp` | landscape, 16:10 | Portal o flujo principal de marketplace; UI completa y legible. |
-| Elementos | `elementos/backoffice.webp` | landscape, 16:10 | Backoffice o flujo transaccional opcional. |
-| El Editor | `el-editor/cms.webp` | landscape, 16:10 | CMS editorial, preferentemente edición o workflow. |
-| El Editor | `el-editor/portal.webp` | landscape, 16:10 | Portal público con portada o una sección editorial. |
-| MineCall | `minecall/world.webp` | wide, 16:9 | Mundo realtime con presencia visible. |
-| MineCall | `minecall/control-center.webp` | landscape, 16:10 | Control Center u operación; opcional. |
-| Cercaya | `cercaya/requester.webp` | mobile, 9:19.5 | Flujo de solicitud en React Native / Expo. |
-| Cercaya | `cercaya/evidence.webp` | mobile, 9:19.5 | Evidencia privada o autorización contextual, sin datos sensibles. |
-| Chemical Software | `chemical/inventory.webp` | landscape, 16:10 | Inventario, compras u operación principal. |
-| Chemical Software | `chemical/operations.webp` | landscape, 16:10 | Dashboard o segundo flujo operativo; opcional. |
+| Proyecto | Carpeta | Capturas visibles |
+| --- | --- | --- |
+| El Editor | `el-editor/` | Platense, Mendoza y métricas de ambos portales |
+| Elementos | `elementos/` | Ofertas, catálogo e inicio público |
+| Chemical Software | `chemical/` | Inventario, comercios, compras/recepciones, venta y permisos |
+| MineCall | `minecall/` | Mundo y acceso |
 
-Usar capturas reales en WebP o AVIF. Evitar marcos de dispositivo, filtros, datos sensibles y
-recortes que oculten la interfaz relevante.
+El orden y los textos alternativos viven en `projects[].gallery`, en
+`src/data/portfolio.data.ts`. Chemical conserva cinco originales seleccionados; los nombres
+numerados identifican su procedencia. El usuario confirmó que nombres, comercios, correos y
+cifras de esas capturas son datos de demostración aptos para exhibición pública.
 
-MemoriesAI no requiere captura: es una herramienta interna de scripts y su caso se presenta
-mediante capacidades técnicas, sin reservar un slot de media.
+## Límites de evidencia
 
-## Instrucciones de captura
+- Las capturas muestran capacidades del producto; no demuestran por sí solas autoría individual,
+  escala, adopción o resultados atribuibles exclusivamente a una contribución.
+- El Editor conserva su estado productivo confirmado por el usuario y ambos portales públicos.
+- Chemical y Cercaya siguen en desarrollo; transformación/costeo de Chemical es un piloto técnico.
+- MemoriesAI es tooling propio/local y no tiene galería de aplicación comercial.
+- Antes de agregar capturas, revisar datos personales, credenciales, rutas internas y clientes reales.
+- Conservar los originales; no superponer texto, simular interfaces ni recortar evidencia relevante.
 
-- Desktop: idealmente 1600×1000; 1440×900 cuando corresponda. Mostrar la UI completa, sin browser chrome salvo que se solicite para la composición final.
-- Mobile: captura nativa de viewport alto y proporción real del dispositivo.
-- En todos los casos: excluir información privada, emails personales, tokens, datos sensibles y barras de desarrollo innecesarias.
+## Material histórico
+
+Los archivos sueltos de `src/assets/cases/` y `experience-manifest.json` pertenecen a versiones
+anteriores. Se conservan como originales y procedencia histórica; no los importa el sitio actual
+ni son autoridad para el copy actualizado. El manifest limita lo que aquellas imágenes demostraban
+al momento de capturarlas, no las capacidades verificadas en auditorías posteriores.
