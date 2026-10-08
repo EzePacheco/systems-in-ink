@@ -5,3 +5,17 @@ dist/
 .DS_Store
 *.log
 .vercel
+
+# Local review output and personal notes (preserved on disk).
+.playwright-mcp/
+test-results/
+/reports/
+reports/**/*.png
+reports/**/*.jpg
+reports/**/*.webp
+.impeccable/config.json
+.impeccable/critique/
+/feat.md
+/otw-snapshot.md
+/otw2.md
+/skill1.md
